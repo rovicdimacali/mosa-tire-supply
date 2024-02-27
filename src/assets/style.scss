@@ -1,1 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
+
+@import "./breakpoints/breakpoints";
+@import "./applayout/applayout";
 @import "./layouts/layouts";
+@import "./constants/constants";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Cabin", sans-serif;
+}
+
+.routerview-container {
+  flex-grow: 1;
+  width: 100%;
+}
