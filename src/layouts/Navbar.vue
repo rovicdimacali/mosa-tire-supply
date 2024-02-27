@@ -1,6 +1,8 @@
 <template>
   <div class="navbar row">
-    <div></div>
+    <div class="logo"></div>
+    <div class="nav-links row"></div>
+    <div class="actions"></div>
   </div>
 </template>
 <script>
