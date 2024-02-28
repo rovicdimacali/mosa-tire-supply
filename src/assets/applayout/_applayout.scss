@@ -1,0 +1,11 @@
+@import "./home/home";
+
+.applayout {
+  width: 100%;
+  height: 100vh;
+
+  .routerview-container {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+}

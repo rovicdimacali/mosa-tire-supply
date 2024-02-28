@@ -1,0 +1,96 @@
+.hero {
+  width: 100%;
+  height: calc(100vh - 100px);
+  background: url(https://res.cloudinary.com/dpm5vdakr/image/upload/v1709128538/mosawebapp/assets/dark-storage-full-big-variety-new-tyres-busy-warehouse-min_uiejw8.jpg);
+  background-position: center;
+  background-size: cover;
+
+  color: white;
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.308);
+    position: relative;
+
+    .heading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+
+      @include m-phone {
+        width: 100%;
+      }
+
+      @include sm-phone {
+        width: 100%;
+      }
+
+      h1 {
+        font-family: "Ethnocentric Rg", sans-serif;
+        font-size: 3rem;
+        margin: 0;
+      }
+
+      .tagline-carousel {
+        width: 100%;
+        height: 50px;
+        padding: 0;
+        margin: 0;
+
+        .p-carousel-content {
+          height: 100%;
+          overflow-y: hidden;
+
+          .p-carousel-items-content {
+            height: 100%;
+
+            p {
+              font-size: 14px;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      align-items: center;
+      padding: 20px;
+      gap: 5px;
+
+      p {
+        margin: 0;
+        color: rgb(163, 163, 163);
+      }
+
+      i {
+        color: rgb(163, 163, 163);
+        animation: bounce 3s infinite ease-in-out;
+      }
+
+      @keyframes bounce {
+        0% {
+          margin-bottom: 0px;
+        }
+
+        50% {
+          margin-bottom: 5px;
+        }
+
+        100% {
+          margin-bottom: 0px;
+        }
+      }
+    }
+  }
+}
