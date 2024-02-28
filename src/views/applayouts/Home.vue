@@ -1,6 +1,10 @@
 <template>
-  <div></div>
+  <div class="home col"><Hero /></div>
 </template>
 <script>
-export default {};
+import Hero from "@/components/home/section/Hero.vue";
+
+export default {
+  components: { Hero },
+};
 </script>
