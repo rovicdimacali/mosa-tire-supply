@@ -1,6 +1,15 @@
 <template>
-  <div></div>
+  <div class="applayout col">
+    <Navbar />
+    <div class="routerview-container">
+      <RouterView />
+    </div>
+  </div>
 </template>
 <script>
-export default {};
+import Navbar from "@/layouts/Navbar.vue";
+
+export default {
+  components: { Navbar },
+};
 </script>
