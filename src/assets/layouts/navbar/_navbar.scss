@@ -9,9 +9,31 @@
   padding: 0 50px;
   justify-content: space-between;
   align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
   .burger-btn {
     color: white;
+    display: none;
+
+    @include tablet {
+      display: block;
+    }
+
+    @include lg-phone {
+      display: block;
+    }
+
+    @include m-phone {
+      display: block;
+    }
+
+    @include sm-phone {
+      display: block;
+    }
+
+    .p-button-label {
+      display: none;
+    }
   }
 
   .logo {
@@ -105,6 +127,32 @@
 
     img {
       width: 100%;
+    }
+  }
+
+  .sidebar-links {
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+
+    a {
+      width: 100%;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      color: white;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.253);
+      }
+    }
+
+    .active-link {
+      background-color: rgba(255, 255, 255, 0.253);
+    }
+
+    .login-btn {
+      margin-top: 20px;
     }
   }
 }

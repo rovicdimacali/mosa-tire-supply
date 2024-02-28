@@ -9,14 +9,18 @@
     />
     <div class="logo">
       <img
-        src="https://res.cloudinary.com/dyvcdyqes/image/upload/v1709042333/assets/Untitled_design_1_oimzu8.png"
+        src="https://res.cloudinary.com/dpm5vdakr/image/upload/v1709128297/mosawebapp/assets/Untitled_design_1_k6o8rv.png"
         alt=""
       />
     </div>
     <div class="nav-links row">
-      <RouterLink to="/home" active-class="active-link"> Home </RouterLink>
-      <RouterLink to=""> Our Products </RouterLink>
-      <RouterLink to=""> Contact Us </RouterLink>
+      <RouterLink
+        v-for="link in links"
+        :key="link.name"
+        :to="link.path"
+        active-class="active-link"
+        >{{ link.name }}</RouterLink
+      >
     </div>
     <div class="actions row">
       <Button label="Login" class="login-btn" />
@@ -27,17 +31,21 @@
     <template #header>
       <div class="logo">
         <img
-          src="https://res.cloudinary.com/dyvcdyqes/image/upload/v1709042333/assets/Untitled_design_1_oimzu8.png"
+          src="https://res.cloudinary.com/dpm5vdakr/image/upload/v1709128297/mosawebapp/assets/Untitled_design_1_k6o8rv.png"
           alt=""
         />
       </div>
     </template>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.
-    </p>
+    <div class="sidebar-links col">
+      <RouterLink
+        v-for="link in links"
+        :key="link.name"
+        :to="link.path"
+        active-class="active-link"
+        >{{ link.name }}</RouterLink
+      >
+      <Button icon="pi pi-sign-in" label="Login" class="login-btn" />
+    </div>
   </Sidebar>
 </template>
 <script>
@@ -45,6 +53,11 @@ export default {
   data() {
     return {
       sidebarVisible: false,
+      links: [
+        { name: "Home", path: "/home" },
+        { name: "Our Products", path: "/our-products" },
+        { name: "Contact Us", path: "/contact-us" },
+      ],
     };
   },
 };
