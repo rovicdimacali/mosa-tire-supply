@@ -1,10 +1,16 @@
 <template>
-  <div class="home col"><Hero /></div>
+  <div class="home col">
+    <Hero />
+    <Promotions />
+    <Brands />
+  </div>
 </template>
 <script>
-import Hero from "@/components/home/section/Hero.vue";
+import Hero from "@/components/home/section/Hero/Hero.vue";
+import Promotions from "@/components/home/section/Promotions/Promotions.vue";
+import Brands from "@/components/home/section/Brands/Brands.vue";
 
 export default {
-  components: { Hero },
+  components: { Hero, Promotions, Brands },
 };
 </script>
