@@ -1,0 +1,28 @@
+.promotions {
+  width: 1200px;
+  justify-content: space-between;
+  margin: 80px 0;
+  color: #1b014a;
+
+  .promo {
+    width: 380px;
+    gap: 20px;
+    align-items: center;
+
+    .promo-details {
+      width: calc(100% - 70px);
+      gap: 5px;
+
+      p {
+        margin: 0;
+        font-weight: bold;
+        font-size: 20px;
+        text-transform: uppercase;
+      }
+
+      small {
+        font-size: 15px;
+      }
+    }
+  }
+}

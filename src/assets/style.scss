@@ -12,7 +12,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Cabin", sans-serif;
-  background: var(--surface-200);
+  background: var(--surface-100);
 }
 
 .routerview-container {
@@ -21,4 +21,22 @@ body {
   display: flex;
   justify-content: center;
   align-items: start;
+}
+
+.routerview-container::-webkit-scrollbar {
+  width: 7px;
+}
+.routerview-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.routerview-container::-webkit-scrollbar-thumb {
+  background: #1b014a;
+}
+.routerview-container::-webkit-scrollbar-thumb {
+  // background: transparent;
+  border-radius: 5px;
+  transition: 0.3s all;
+}
+.routerview-container::-webkit-scrollbar-thumb:hover {
+  background: #26075f;
 }
