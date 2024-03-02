@@ -10,7 +10,7 @@
         v-for="image in imageSrc"
         :key="image.id"
         :class="{ 'image-container': true, active: image.id === selectedBrand }"
-        @click="selectBrand(image.id)"
+        @click="selectBrand(image)"
       >
         <img :src="image.src" alt="mosa-tire-shop-brands" />
       </div>
@@ -21,6 +21,7 @@
 
 <script>
 import ProductsPreview from "./ProductsPreview.vue";
+import { EventBus } from "@/services/EventBus";
 export default {
   components: { ProductsPreview },
   data() {
@@ -28,10 +29,12 @@ export default {
       imageSrc: [
         {
           id: 1,
+          name: "Prinx",
           src: "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709216831/mosawebapp/brands/prinx_square_2_ca8rvl.png",
         },
         {
           id: 2,
+          name: "Sunny",
           src: "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709216828/mosawebapp/brands/sunny_square_1_wjospn.png",
         },
       ],
@@ -44,8 +47,9 @@ export default {
   },
 
   methods: {
-    selectBrand(id) {
-      this.selectedBrand = id;
+    selectBrand(image) {
+      this.selectedBrand = image.id;
+      EventBus.emit("brandSelected", image);
     },
   },
 };
