@@ -2,76 +2,83 @@
   width: 100%;
   padding: 70px;
   background-color: rgb(24, 24, 24);
+  color: white;
   gap: 50px;
 
-  @include lg-phone {
-    flex-direction: column;
-    align-items: center;
-    padding: 70px;
-  }
-
-  @include m-phone {
-    flex-direction: column;
-    align-items: center;
-    padding: 70px;
-  }
-
-  .footer-info {
-    flex: 1 1 auto;
-    width: 50%;
-    color: white;
-    gap: 20px;
+  .footer-row {
+    gap: 50px;
 
     @include lg-phone {
-      width: 100%;
+      flex-direction: column;
+      align-items: center;
     }
 
     @include m-phone {
-      width: 100%;
+      flex-direction: column;
+      align-items: center;
     }
 
-    @include sm-phone {
-      width: 100%;
-    }
-
-    .logo {
-      width: 200px;
-      margin-top: -30px;
-    }
-
-    .about-us {
-      margin: 0px 20px;
+    .footer-info {
+      flex: 1 1 auto;
+      width: 50%;
+      color: white;
+      gap: 20px;
 
       @include lg-phone {
-        margin: 0;
+        width: 100%;
       }
 
       @include m-phone {
-        margin: 0;
+        width: 100%;
       }
 
       @include sm-phone {
-        margin: 0;
+        width: 100%;
       }
-    }
 
-    p {
-      margin: 5px 0;
-      font-weight: bold;
-    }
+      .logo {
+        width: 200px;
+        margin-top: -30px;
+      }
 
-    .socmed {
-      gap: 5px;
+      .about-us {
+        margin: 0px 20px;
 
-      .socmed-icon {
-        font-size: 30px;
-        color: white;
-        transition: 0.3s all;
+        @include lg-phone {
+          margin: 0;
+        }
 
-        &:hover {
-          color: var(--primary-color);
+        @include m-phone {
+          margin: 0;
+        }
+
+        @include sm-phone {
+          margin: 0;
+        }
+      }
+
+      p {
+        margin: 5px 0;
+        font-weight: bold;
+      }
+
+      .socmed {
+        gap: 5px;
+
+        .socmed-icon {
+          font-size: 30px;
+          color: white;
+          transition: 0.3s all;
+
+          &:hover {
+            color: var(--primary-color);
+          }
         }
       }
     }
+  }
+
+  .copyright {
+    align-self: center;
   }
 }
