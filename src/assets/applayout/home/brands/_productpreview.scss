@@ -5,33 +5,47 @@
   .products-preview-carousel {
     .p-carousel-items-container {
       gap: 5px;
-      padding: 20px 0;
-      .item-card {
-        width: 300px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-        .item {
-          width: 100%;
+      .p-carousel-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-          .image-container {
+        .item-card {
+          width: 300px;
+
+          .item {
             width: 100%;
 
-            img {
-              width: 250px;
-              height: 330px;
+            .image-container {
+              width: 100%;
+
+              img {
+                width: 250px;
+                height: 330px;
+              }
             }
-          }
 
-          .item-details {
-            justify-content: space-between;
-            align-items: center;
+            .item-details {
+              justify-content: space-between;
+              align-items: center;
 
-            .actions {
-              gap: 5px;
+              p {
+                font-weight: bold;
+                margin: 0;
+              }
+
+              .actions {
+                gap: 5px;
+              }
             }
           }
         }
       }
     }
+  }
+
+  .show-more-btn {
+    align-self: center;
   }
 }
