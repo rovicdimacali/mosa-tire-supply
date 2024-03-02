@@ -75,21 +75,6 @@
 
       i {
         color: rgb(163, 163, 163);
-        animation: bounce 3s infinite ease-in-out;
-      }
-
-      @keyframes bounce {
-        0% {
-          margin-bottom: 0px;
-        }
-
-        50% {
-          margin-bottom: 5px;
-        }
-
-        100% {
-          margin-bottom: 0px;
-        }
       }
     }
   }

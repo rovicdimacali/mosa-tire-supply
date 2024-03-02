@@ -1,0 +1,64 @@
+.promotions {
+  width: 1200px;
+  justify-content: space-between;
+  margin: 80px 0;
+  color: #1b014a;
+
+  @include tablet {
+    width: 100%;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @include lg-phone {
+    width: 100%;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @include m-phone {
+    width: 100%;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @include sm-phone {
+    width: 100%;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .promo {
+    width: 380px;
+    gap: 20px;
+    align-items: center;
+
+    @include m-phone {
+      width: 300px;
+    }
+
+    .promo-details {
+      width: calc(100% - 70px);
+      gap: 5px;
+
+      p {
+        margin: 0;
+        font-weight: bold;
+        font-size: 20px;
+        text-transform: uppercase;
+      }
+
+      small {
+        font-size: 15px;
+      }
+    }
+  }
+}

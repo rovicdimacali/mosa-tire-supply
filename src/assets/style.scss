@@ -2,9 +2,9 @@
 @import url("https://fonts.cdnfonts.com/css/ethnocentric");
 
 @import "./breakpoints/breakpoints";
+@import "./constants/constants";
 @import "./applayout/applayout";
 @import "./layouts/layouts";
-@import "./constants/constants";
 
 $page-max-width: 1200px;
 
@@ -12,7 +12,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Cabin", sans-serif;
-  background: var(--surface-200);
+  background: var(--surface-100);
+  background: url(https://res.cloudinary.com/dpm5vdakr/image/upload/v1709359989/mosawebapp/assets/mosa-bg_n0mxck.png);
+  background-position: center;
+  background-size: cover;
 }
 
 .routerview-container {
@@ -21,4 +24,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: start;
+}
+
+.routerview-container::-webkit-scrollbar {
+  width: 7px;
+}
+.routerview-container::-webkit-scrollbar-track {
+  background: #ede4ff;
+}
+.routerview-container::-webkit-scrollbar-thumb {
+  background: #1b014a;
+}
+.routerview-container::-webkit-scrollbar-thumb {
+  // background: transparent;
+  transition: 0.3s all;
+}
+.routerview-container::-webkit-scrollbar-thumb:hover {
+  background: #26075f;
 }

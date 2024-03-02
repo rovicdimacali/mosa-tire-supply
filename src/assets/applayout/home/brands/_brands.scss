@@ -1,0 +1,56 @@
+@import "./productpreview";
+
+.brands {
+  margin: 80px 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 40px;
+
+  .brand-heading {
+    text-align: center;
+
+    h1 {
+      font-family: "Ethnocentric Rg", sans-serif;
+      margin: 0;
+    }
+  }
+
+  .brand-row {
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+
+    @include lg-phone {
+      gap: 50px;
+    }
+
+    @include m-phone {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    @include sm-phone {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .image-container {
+      width: 200px;
+      cursor: pointer;
+      border-radius: 15px;
+      padding: 20px;
+      transition: 0.3s all;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      background-color: white;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .active {
+      background-color: rgb(229, 224, 255);
+    }
+  }
+}

@@ -1,0 +1,107 @@
+.pickup {
+  width: 1200px;
+  height: 350px;
+  padding: 40px 80px;
+  margin: 20px 50px;
+  background-color: rgba(27, 1, 74);
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  justify-content: space-between;
+  align-items: center;
+
+  @include tablet {
+    width: calc(100% - 20px);
+  }
+
+  @include lg-phone {
+    width: calc(100% - 20px);
+    height: auto;
+    flex-direction: column-reverse !important;
+  }
+
+  @include m-phone {
+    width: calc(100% - 20px);
+    height: auto;
+    flex-direction: column-reverse !important;
+  }
+
+  @include sm-phone {
+    width: calc(100% - 20px);
+    height: auto;
+    flex-direction: column-reverse !important;
+  }
+
+  .pickup-copy {
+    color: white;
+    gap: 10px;
+    width: 500px;
+
+    @include tablet {
+      width: 300px;
+    }
+
+    @include lg-phone {
+      width: 400px;
+    }
+
+    @include m-phone {
+      width: 300px;
+    }
+
+    @include sm-phone {
+      width: 300px;
+    }
+
+    h1 {
+      margin: 0;
+
+      @include tablet {
+        font-size: 20px;
+      }
+
+      @include lg-phone {
+        font-size: 20px;
+      }
+
+      @include m-phone {
+        font-size: 20px;
+      }
+
+      @include sm-phone {
+        font-size: 20px;
+      }
+    }
+
+    p {
+    }
+
+    .order-now {
+      justify-self: start;
+      width: fit-content;
+    }
+  }
+
+  img {
+    width: 400px;
+    height: 550px;
+    margin-bottom: 200px;
+
+    @include lg-phone {
+      margin: -200px 0 20px 0;
+    }
+
+    @include m-phone {
+      width: 300px;
+      height: 450px;
+      margin: -200px 0 20px 0;
+    }
+
+    @include sm-phone {
+      width: 300px;
+      height: 450px;
+      margin: -200px 0 20px 0;
+    }
+  }
+}
