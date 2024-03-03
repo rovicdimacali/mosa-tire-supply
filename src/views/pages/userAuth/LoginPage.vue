@@ -24,9 +24,9 @@
               </div>
               <small class="error">{{ isError }}</small>
               <div class="username-container col">
-                <label for="username">Username</label>
+                <label for="username">Email</label>
                 <InputText
-                  v-model="loginObj.username"
+                  v-model="loginObj.email"
                   class="input"
                   required
                   :invalid="isError?.includes('exist') ? true : false"
@@ -57,8 +57,14 @@
               />
             </form>
             <div class="forgot-password-container col">
-              <small>Forgot Password?</small>
-              <small>No Account Yet? Click here to create one.</small>
+              <RouterLink to="/forgot-password"
+                ><small>Forgot Password?</small></RouterLink
+              >
+              <RouterLink to="/sign-up"
+                ><small
+                  >No Account Yet? Click here to create one.</small
+                ></RouterLink
+              >
             </div>
           </template>
         </Card>
@@ -73,7 +79,7 @@ export default {
   data() {
     return {
       loginObj: {
-        username: null,
+        email: null,
         password: null,
       },
       isLoading: false,
@@ -88,6 +94,10 @@ export default {
         const response = await loginUser(this.loginObj);
         if (response) {
           localStorage.setItem("token", response.accessToken);
+          localStorage.setItem("userID", response.accountDto.id);
+          localStorage.setItem("name", response.accountDto.fullname);
+          localStorage.setItem("email", response.accountDto.email);
+
           this.$router.push("/home");
         }
       } catch (error) {

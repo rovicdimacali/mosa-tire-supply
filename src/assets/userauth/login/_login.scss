@@ -122,6 +122,11 @@
             }
           }
 
+          .error {
+            margin-bottom: 10px;
+            color: rgb(226, 78, 78);
+          }
+
           .username-container {
             transition: 0.3s all;
             align-items: center;
@@ -169,10 +174,14 @@
         .forgot-password-container {
           align-items: center;
           margin-top: 20px;
-          color: var(--primary-color);
           cursor: pointer;
           font-size: 15px;
           gap: 10px;
+
+          a {
+            text-decoration: none;
+            color: var(--primary-color);
+          }
         }
       }
     }
