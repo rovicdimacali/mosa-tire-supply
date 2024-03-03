@@ -23,7 +23,9 @@
       >
     </div>
     <div class="actions row">
-      <Button label="Login" class="login-btn" />
+      <RouterLink to="/login"
+        ><Button label="Login" class="login-btn"
+      /></RouterLink>
       <Button icon="pi pi-shopping-cart" rounded outlined class="cart-btn" />
     </div>
   </div>
@@ -44,7 +46,9 @@
         active-class="active-link"
         >{{ link.name }}</RouterLink
       >
-      <Button icon="pi pi-sign-in" label="Login" class="login-btn" />
+      <RouterLink to="/login"
+        ><Button icon="pi pi-sign-in" label="Login" class="login-btn"
+      /></RouterLink>
     </div>
   </Sidebar>
 </template>

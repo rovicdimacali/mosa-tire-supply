@@ -15,6 +15,9 @@ import Sidebar from "primevue/sidebar";
 import Carousel from "primevue/carousel";
 import Card from "primevue/card";
 import Image from "primevue/image";
+import InputText from "primevue/inputtext";
+import Password from "primevue/password";
+import FloatLabel from "primevue/floatlabel";
 
 const app = createApp(App);
 
@@ -27,5 +30,8 @@ app.component("Sidebar", Sidebar);
 app.component("Carousel", Carousel);
 app.component("Card", Card);
 app.component("Image", Image);
+app.component("FloatLabel", FloatLabel);
+app.component("InputText", InputText);
+app.component("Password", Password);
 
 app.mount("#app");

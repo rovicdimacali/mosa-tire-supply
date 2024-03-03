@@ -1,0 +1,180 @@
+.login {
+  width: 100%;
+  height: 100vh;
+  background: url(https://res.cloudinary.com/dpm5vdakr/image/upload/v1709390825/mosawebapp/assets/mosa-login-bg-min_csh1vi.jpg);
+  background-size: cover;
+  background-position: center;
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.684);
+
+    .login-hero {
+      flex: 1 1 auto;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+      color: white;
+
+      @include tablet {
+        display: none;
+      }
+
+      @include lg-phone {
+        display: none;
+      }
+
+      @include m-phone {
+        display: none;
+      }
+
+      @include sm-phone {
+        display: none;
+      }
+
+      .logo {
+        width: 400px;
+      }
+
+      p {
+        margin: -50px 0 0 50px;
+        font-family: "Ethnocentric Rg", sans-serif;
+        font-style: italic;
+      }
+    }
+
+    .login-form-container {
+      flex: 1 1 auto;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include tablet {
+        width: 100%;
+      }
+
+      @include lg-phone {
+        width: 100%;
+      }
+
+      @include m-phone {
+        width: 100%;
+      }
+
+      @include sm-phone {
+        width: 100%;
+      }
+
+      .login-box {
+        background: rgb(0, 0, 0);
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(27, 1, 74, 1) 100%
+        );
+        width: 320px;
+        position: relative;
+        padding: 40px 0 20px 0;
+        align-items: center;
+        position: relative;
+
+        .logo {
+          position: absolute;
+          top: -50px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 200px;
+          display: none;
+
+          @include tablet {
+            display: block;
+          }
+
+          @include lg-phone {
+            display: block;
+          }
+
+          @include m-phone {
+            display: block;
+          }
+
+          @include sm-phone {
+            display: block;
+          }
+        }
+
+        .login-form {
+          color: white;
+
+          .login-header {
+            align-items: center;
+            margin-bottom: 30px;
+
+            h2 {
+              font-family: "Ethnocentric Rg", sans-serif;
+              text-align: center;
+              margin: 0;
+            }
+          }
+
+          .username-container {
+            transition: 0.3s all;
+            align-items: center;
+            width: 100%;
+            gap: 5px;
+
+            label {
+              align-self: start;
+              font-size: 14px;
+              color: #dddd;
+            }
+
+            .input {
+              background-color: transparent;
+              color: #dddd;
+            }
+          }
+
+          .password-container {
+            transition: 0.3s all;
+            margin: 10px 0 0 0;
+            align-items: center;
+            width: 100%;
+            gap: 5px;
+
+            label {
+              align-self: start;
+              font-size: 14px;
+              color: #dddd;
+            }
+
+            .p-password-input {
+              background-color: transparent;
+              width: 100%;
+              padding-right: 10px !important;
+              color: #dddd;
+            }
+          }
+
+          .login-btn {
+            margin-top: 30px;
+          }
+        }
+
+        .forgot-password-container {
+          align-items: center;
+          margin-top: 20px;
+          color: var(--primary-color);
+          cursor: pointer;
+          font-size: 15px;
+          gap: 10px;
+        }
+      }
+    }
+  }
+}
