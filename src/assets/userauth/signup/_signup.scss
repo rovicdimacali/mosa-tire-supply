@@ -1,4 +1,4 @@
-.otp {
+.sign-up {
   width: 100%;
   height: 100vh;
   background: url(https://res.cloudinary.com/dpm5vdakr/image/upload/v1709390825/mosawebapp/assets/mosa-login-bg-min_csh1vi.jpg);
@@ -10,7 +10,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.684);
 
-    .otp-hero {
+    .sign-up-hero {
       flex: 1 1 auto;
       width: 50%;
       height: 100%;
@@ -46,7 +46,7 @@
       }
     }
 
-    .otp-form-container {
+    .sign-up-form-container {
       flex: 1 1 auto;
       width: 50%;
       height: 100%;
@@ -70,7 +70,7 @@
         width: 100%;
       }
 
-      .otp-box {
+      .sign-up-box {
         background: rgb(0, 0, 0);
         background: linear-gradient(
           90deg,
@@ -79,7 +79,7 @@
         );
         width: 320px;
         position: relative;
-        padding: 40px 0 20px 0;
+        padding: 20px 0 20px 0;
         align-items: center;
         position: relative;
 
@@ -108,12 +108,12 @@
           }
         }
 
-        .otp-form {
+        .sign-up-form {
           color: white;
 
-          .otp-header {
+          .sign-up-header {
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
 
             h2 {
               font-family: "Ethnocentric Rg", sans-serif;
@@ -125,28 +125,95 @@
           .error {
             margin-bottom: 10px;
             color: rgb(226, 78, 78);
+            font-size: 12px;
+            margin: 0;
           }
 
-          .otp-container {
-            transition: 0.3s all;
-            align-items: center;
-            width: 100%;
-            gap: 5px;
+          .sign-up-form-inputs {
+            gap: 10px;
 
-            label {
-              align-self: start;
-              font-size: 14px;
-              color: #dddd;
-            }
-
-            .p-inputotp-input {
-              background-color: transparent;
-              color: #dddd;
+            .email-container {
+              transition: 0.3s all;
+              align-items: center;
               width: 100%;
+              gap: 5px;
+
+              label {
+                align-self: start;
+                font-size: 14px;
+                color: #dddd;
+              }
+
+              .input {
+                background-color: transparent;
+                color: #dddd;
+                width: 100%;
+              }
+            }
+
+            .name-container {
+              transition: 0.3s all;
+              align-items: center;
+              width: 100%;
+              gap: 5px;
+
+              label {
+                align-self: start;
+                font-size: 14px;
+                color: #dddd;
+              }
+
+              .input {
+                background-color: transparent;
+                color: #dddd;
+                width: 100%;
+              }
+            }
+
+            .password-container {
+              transition: 0.3s all;
+              align-items: center;
+              width: 100%;
+              gap: 5px;
+
+              label {
+                align-self: start;
+                font-size: 14px;
+                color: #dddd;
+              }
+
+              .p-password-input {
+                background-color: transparent;
+                width: 100%;
+
+                color: #dddd;
+              }
+            }
+
+            .contact-container {
+              transition: 0.3s all;
+              align-items: center;
+              width: 100%;
+              gap: 5px;
+
+              label {
+                align-self: start;
+                font-size: 14px;
+                color: #dddd;
+              }
+
+              .p-inputgroup-addon {
+                background-color: transparent;
+                color: #dddd;
+              }
+              .p-inputnumber-input {
+                background-color: transparent;
+                color: #dddd;
+              }
             }
           }
 
-          .otp-btn {
+          .sign-up-btn {
             margin-top: 30px;
           }
         }

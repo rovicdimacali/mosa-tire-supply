@@ -5,7 +5,7 @@ export async function forgotPasswordUser(obj) {
   return response.data;
 }
 
-export async function OTPUser(obj) {
+export async function forgotOTPUser(obj) {
   const response = await axios.post(
     `/account/changePasswordOtp/${obj.userID}`,
     {

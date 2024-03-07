@@ -18,11 +18,21 @@ import Image from "primevue/image";
 import InputText from "primevue/inputtext";
 import Password from "primevue/password";
 import FloatLabel from "primevue/floatlabel";
+import InputGroup from "primevue/inputgroup";
+import InputGroupAddon from "primevue/inputgroupaddon";
+import InputNumber from "primevue/inputnumber";
+import InputOtp from "primevue/inputotp";
+import ConfirmDialog from "primevue/confirmdialog";
+import ConfirmationService from "primevue/confirmationservice";
+import Tooltip from "primevue/tooltip";
 
 const app = createApp(App);
 
+app.directive("tooltip", Tooltip);
+
 app.use(router);
 app.use(PrimeVue);
+app.use(ConfirmationService);
 
 app.component("Icon", Icon);
 app.component("Button", Button);
@@ -33,5 +43,10 @@ app.component("Image", Image);
 app.component("FloatLabel", FloatLabel);
 app.component("InputText", InputText);
 app.component("Password", Password);
+app.component("InputGroup", InputGroup);
+app.component("InputGroupAddon", InputGroupAddon);
+app.component("InputNumber", InputNumber);
+app.component("InputOtp", InputOtp);
+app.component("ConfirmDialog", ConfirmDialog);
 
 app.mount("#app");

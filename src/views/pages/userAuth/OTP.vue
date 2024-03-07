@@ -17,18 +17,22 @@
               alt=""
               class="logo"
             />
-            <form class="otp-form col" @submit.prevent="otp">
+            <form
+              v-if="!isSignUpSuccess"
+              class="otp-form col"
+              @submit.prevent="otp"
+            >
               <div class="otp-header col">
                 <h2>OTP</h2>
                 <small>Enter the OTP sent to your email</small>
               </div>
               <small class="error">{{ isError }}</small>
               <div class="otp-container col">
-                <label for="otp">OTP</label>
-                <InputText
+                <InputOtp
                   v-model="otpObj.otp"
                   class="input"
                   required
+                  :length="6"
                   :invalid="isError?.includes('exist') ? true : false"
                 />
               </div>
@@ -39,6 +43,11 @@
                 class="otp-btn"
               />
             </form>
+            <Success
+              v-if="isSignUpSuccess"
+              :message="'Congratulations! You have successfully Signed Up!'"
+              :login="true"
+            />
           </template>
         </Card>
       </div>
@@ -46,8 +55,11 @@
   </div>
 </template>
 <script>
-import { OTPUser } from "@/services/UserAuth/ForgotPassword";
+import { forgotOTPUser } from "@/services/UserAuth/ForgotPassword";
+import { signUpOTPUser } from "@/services/UserAuth/SignUp";
+import Success from "@/components/userAuth/Success.vue";
 export default {
+  components: { Success },
   data() {
     return {
       otpObj: {
@@ -56,6 +68,8 @@ export default {
       },
       isLoading: false,
       isError: null,
+      previousRoute: null,
+      isSignUpSuccess: false,
     };
   },
 
@@ -63,9 +77,12 @@ export default {
     async otp() {
       this.isLoading = true;
       try {
-        const response = await OTPUser(this.otpObj);
-        if (response) {
-          console.log(response);
+        if (this.previousRoute === "/forgot-password") {
+          const response = await forgotOTPUser(this.otpObj);
+          if (response) this.$router.push("/reset-password");
+        } else {
+          await signUpOTPUser(this.otpObj);
+          this.isSignUpSuccess = true;
         }
       } catch (error) {
         console.error(error);
@@ -77,6 +94,7 @@ export default {
 
   mounted() {
     this.otpObj.userID = localStorage.getItem("userID");
+    this.previousRoute = this.$router.options.history.state.back;
   },
 };
 </script>

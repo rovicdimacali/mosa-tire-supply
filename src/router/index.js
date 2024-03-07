@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AppLayout from "../views/pages/AppLayout.vue";
 import Home from "../views/applayouts/Home.vue";
-import LoginPage from "@/views/pages/userAuth/LoginPage.vue";
-import ForgotPassword from "@/views/pages/userAuth/ForgotPassword.vue";
-import OTP from "@/views/pages/userAuth/OTP.vue";
+import authRoutes from "./authRoutes/authRoutes";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,22 +18,24 @@ const router = createRouter({
         },
       ],
     },
-    {
-      path: "/login",
-      name: "Login",
-      component: LoginPage,
-    },
-    {
-      path: "/forgot-password",
-      name: "Forgot Password",
-      component: ForgotPassword,
-    },
-    {
-      path: "/otp",
-      name: "OTP",
-      component: OTP,
-    },
+    ...authRoutes,
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated =
+    localStorage.getItem("token") !== null ||
+    localStorage.getItem("token") !== undefined;
+
+  if (to.matched.some((route) => route.meta.requiresGuest) && isAuthenticated) {
+    // If the route requires guest (not authenticated) and the user is authenticated
+    next({ name: "Home" }); // Redirect to home or another route
+  } else if (to.meta.requiresOtp && from.name !== "OTP") {
+    // If the route requires OTP and the user didn't come from the OTP page
+    next({ name: "OTP" }); // Redirect to OTP page or another appropriate route
+  } else {
+    next();
+  }
 });
 
 export default router;

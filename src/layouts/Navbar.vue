@@ -1,4 +1,5 @@
 <template>
+  <ConfirmDialog />
   <div class="navbar row">
     <Button
       icon="pi pi-bars"
@@ -23,10 +24,25 @@
       >
     </div>
     <div class="actions row">
-      <RouterLink to="/login"
+      <RouterLink v-if="!accessToken" to="/login"
         ><Button label="Login" class="login-btn"
       /></RouterLink>
-      <Button icon="pi pi-shopping-cart" rounded outlined class="cart-btn" />
+      <Button
+        v-tooltip.bottom="'Cart'"
+        icon="pi pi-shopping-cart"
+        rounded
+        outlined
+        class="cart-btn"
+      />
+      <Button
+        v-if="accessToken"
+        v-tooltip.bottom="'Logout'"
+        @click="logout()"
+        icon="pi pi-sign-out"
+        rounded
+        outlined
+        class="logout-btn"
+      />
     </div>
   </div>
   <Sidebar v-model:visible="sidebarVisible" header="Sidebar" class="sidebar">
@@ -62,7 +78,30 @@ export default {
         { name: "Our Products", path: "/our-products" },
         { name: "Contact Us", path: "/contact-us" },
       ],
+      accessToken: null,
     };
+  },
+  methods: {
+    logout() {
+      console.log("clicked");
+      console.log(this.$confirm.require);
+      this.$confirm.require({
+        message: "Are you sure you want to logout?",
+        header: "Logout",
+        icon: "pi pi-exclamation-triangle",
+        rejectLabel: "No",
+        acceptLabel: "Yes",
+        accept: () => {
+          localStorage.clear();
+          this.accessToken = localStorage.getItem("token");
+        },
+        reject: () => {},
+      });
+    },
+  },
+  mounted() {
+    this.accessToken = localStorage.getItem("token");
+    console.log(this.accessToken);
   },
 };
 </script>

@@ -22,62 +22,70 @@
                 <h2>sign-up</h2>
                 <small>Enter your account details</small>
               </div>
-              <small class="error">{{ isError }}</small>
-              <div class="email-container col">
-                <label for="email">Email</label>
-                <InputText
-                  v-model="signUpObj.email"
-                  class="input"
-                  required
-                  :invalid="isError?.includes('exist') ? true : false"
-                />
-              </div>
-              <div class="name-container col">
-                <label for="name">Full Name</label>
-                <InputText
-                  v-model="signUpObj.name"
-                  class="input"
-                  required
-                  :invalid="isError?.includes('exist') ? true : false"
-                />
-              </div>
-              <div class="password-container col">
-                <label for="password">Password</label>
-                <Password
-                  v-model="signUpObj.password"
-                  :feedback="false"
-                  toggleMask
-                  class="input"
-                  required
-                  :invalid="
-                    isError?.includes('incorrect')
-                      ? true
-                      : isError
-                      ? true
-                      : false
-                  "
-                />
-              </div>
-              <div class="password-container col">
-                <label for="password">Confirm Password</label>
-                <Password
-                  v-model="signUpObj.confirm_password"
-                  :feedback="false"
-                  toggleMask
-                  class="input"
-                  required
-                  :invalid="
-                    isError?.includes('incorrect')
-                      ? true
-                      : isError
-                      ? true
-                      : false
-                  "
-                />
+              <ul v-if="isError && Array.isArray(isError)" class="error-list">
+                <li
+                  v-for="(error, index) in isError"
+                  :key="index"
+                  class="error"
+                >
+                  {{ error }}
+                </li>
+              </ul>
+              <small
+                v-else-if="isError && !Array.isArray(isError)"
+                class="error"
+                >{{ isError }}</small
+              >
+
+              <div class="sign-up-form-inputs col">
+                <div class="email-container col">
+                  <label for="email">Email</label>
+                  <InputText v-model="signUpObj.email" class="input" required />
+                </div>
+                <div class="name-container col">
+                  <label for="name">Full Name</label>
+                  <InputText
+                    v-model="signUpObj.fullName"
+                    class="input"
+                    required
+                  />
+                </div>
+                <div class="password-container col">
+                  <label for="password">Password</label>
+                  <Password
+                    v-model="signUpObj.password"
+                    :feedback="false"
+                    toggleMask
+                    class="input"
+                    required
+                  />
+                </div>
+                <div class="password-container col">
+                  <label for="password">Confirm Password</label>
+                  <Password
+                    v-model="signUpObj.confirmPassword"
+                    :feedback="false"
+                    toggleMask
+                    class="input"
+                    required
+                  />
+                </div>
+                <div class="contact-container col">
+                  <label for="contact">Contact Number</label>
+                  <InputGroup>
+                    <InputGroupAddon>+63</InputGroupAddon>
+                    <InputNumber
+                      v-model="initial_contact_number"
+                      placeholder="9123456789"
+                      :useGrouping="false"
+                      class="input"
+                    />
+                  </InputGroup>
+                </div>
               </div>
               <Button
                 :loading="isLoading"
-                label="sign-up"
+                label="Sign Up"
                 type="submit"
                 class="sign-up-btn"
               />
@@ -89,36 +97,101 @@
   </div>
 </template>
 <script>
+import { signUpUser } from "@/services/UserAuth/SignUp";
+import {
+  required,
+  email,
+  minLength,
+  sameAs,
+  helpers,
+} from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+
 export default {
+  setup() {
+    const v$ = useVuelidate();
+    return { v$ };
+  },
   data() {
     return {
       signUpObj: {
         email: null,
-        name: null,
+        fullName: null,
         password: null,
-        confirm_password: null,
-        contact_number: null,
+        confirmPassword: null,
+        contactNumber: null,
       },
+      initial_contact_number: null,
       isLoading: false,
       isError: null,
     };
   },
-
+  validations() {
+    const contactNumberValidator = helpers.regex(/^9\d{9}$/);
+    const contactNumberWithMessage = helpers.withMessage(
+      "Incorrect Contact Number.",
+      contactNumberValidator
+    );
+    return {
+      signUpObj: {
+        email: {
+          required,
+          email: helpers.withMessage("Invalid Email entered.", email),
+        },
+        fullName: {
+          required: helpers.withMessage("Name is required.", required),
+        },
+        password: {
+          required,
+          minLength: helpers.withMessage(
+            "Password must be 8 characters long.",
+            minLength(8)
+          ),
+        },
+        confirmPassword: {
+          required,
+          sameAsPassword: helpers.withMessage(
+            "Confirm Password must be the same with Password.",
+            sameAs(this.signUpObj.password)
+          ),
+        },
+        contactNumber: {
+          required: helpers.withMessage(
+            "Contact Number is required.",
+            required
+          ),
+        },
+      },
+      initial_contact_number: {
+        required: helpers.withMessage("Contact Number is required.", required),
+        contactNumberWithMessage,
+      },
+    };
+  },
   methods: {
-    // async signUp() {
-    //   this.isLoading = true;
-    //   try {
-    //     const response = await sign-upUser(this.sign-upObj);
-    //     if (response) {
-    //       localStorage.setItem("token", response.accessToken);
-    //       this.$router.push("/home");
-    //     }
-    //   } catch (error) {
-    //     console.error(error);
-    //     this.isError = error.response.data.message;
-    //   }
-    //   this.isLoading = false;
-    // },
+    async signUp() {
+      this.signUpObj.contactNumber = `+63${this.initial_contact_number}`;
+      const result = await this.v$.$validate();
+      this.isLoading = true;
+      if (!result) {
+        // Log specific validation errors
+        this.isError = this.v$.$errors.map((error) => error.$message);
+      } else {
+        this.isError = "";
+        try {
+          const response = await signUpUser(this.signUpObj);
+          if (response) {
+            localStorage.setItem("userID", response.object.id);
+            this.$router.push("/otp");
+          }
+        } catch (error) {
+          console.error(error);
+          this.isError = error.response.data.message;
+          console.log(Array.isArray(this.isError));
+        }
+      }
+      this.isLoading = false;
+    },
   },
 };
 </script>

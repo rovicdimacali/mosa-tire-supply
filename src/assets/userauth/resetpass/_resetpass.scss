@@ -1,4 +1,4 @@
-.otp {
+.resetpass {
   width: 100%;
   height: 100vh;
   background: url(https://res.cloudinary.com/dpm5vdakr/image/upload/v1709390825/mosawebapp/assets/mosa-login-bg-min_csh1vi.jpg);
@@ -10,7 +10,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.684);
 
-    .otp-hero {
+    .resetpass-hero {
       flex: 1 1 auto;
       width: 50%;
       height: 100%;
@@ -46,7 +46,7 @@
       }
     }
 
-    .otp-form-container {
+    .resetpass-form-container {
       flex: 1 1 auto;
       width: 50%;
       height: 100%;
@@ -70,7 +70,7 @@
         width: 100%;
       }
 
-      .otp-box {
+      .resetpass-box {
         background: rgb(0, 0, 0);
         background: linear-gradient(
           90deg,
@@ -108,10 +108,10 @@
           }
         }
 
-        .otp-form {
+        .resetpass-form {
           color: white;
 
-          .otp-header {
+          .resetpass-header {
             align-items: center;
             margin-bottom: 30px;
 
@@ -127,11 +127,12 @@
             color: rgb(226, 78, 78);
           }
 
-          .otp-container {
+          .password-container {
             transition: 0.3s all;
             align-items: center;
             width: 100%;
             gap: 5px;
+            margin-bottom: 10px;
 
             label {
               align-self: start;
@@ -139,14 +140,14 @@
               color: #dddd;
             }
 
-            .p-inputotp-input {
+            .p-password-input {
               background-color: transparent;
-              color: #dddd;
               width: 100%;
+              color: #dddd;
             }
           }
 
-          .otp-btn {
+          .resetpass-btn {
             margin-top: 30px;
           }
         }
