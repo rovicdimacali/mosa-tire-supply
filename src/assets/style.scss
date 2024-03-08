@@ -3,10 +3,10 @@
 
 @import "./breakpoints/breakpoints";
 @import "./constants/constants";
-@import "./applayout/applayout";
 @import "./layouts/layouts";
-
-$page-max-width: 1200px;
+@import "./applayout/applayout";
+@import "./userauth/userauth";
+@import "./ourproducts/ourproducts";
 
 body {
   margin: 0;

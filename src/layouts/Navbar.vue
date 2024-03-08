@@ -1,4 +1,5 @@
 <template>
+  <ConfirmDialog />
   <div class="navbar row">
     <Button
       icon="pi pi-bars"
@@ -23,8 +24,25 @@
       >
     </div>
     <div class="actions row">
-      <Button label="Login" class="login-btn" />
-      <Button icon="pi pi-shopping-cart" rounded outlined class="cart-btn" />
+      <RouterLink v-if="!accessToken" to="/login"
+        ><Button label="Login" class="login-btn"
+      /></RouterLink>
+      <Button
+        v-tooltip.bottom="'Cart'"
+        icon="pi pi-shopping-cart"
+        rounded
+        outlined
+        class="cart-btn"
+      />
+      <Button
+        v-if="accessToken"
+        v-tooltip.bottom="'Logout'"
+        @click="logout()"
+        icon="pi pi-sign-out"
+        rounded
+        outlined
+        class="logout-btn"
+      />
     </div>
   </div>
   <Sidebar v-model:visible="sidebarVisible" header="Sidebar" class="sidebar">
@@ -44,7 +62,9 @@
         active-class="active-link"
         >{{ link.name }}</RouterLink
       >
-      <Button icon="pi pi-sign-in" label="Login" class="login-btn" />
+      <RouterLink to="/login"
+        ><Button icon="pi pi-sign-in" label="Login" class="login-btn"
+      /></RouterLink>
     </div>
   </Sidebar>
 </template>
@@ -58,7 +78,27 @@ export default {
         { name: "Our Products", path: "/our-products" },
         { name: "Contact Us", path: "/contact-us" },
       ],
+      accessToken: null,
     };
+  },
+  methods: {
+    logout() {
+      this.$confirm.require({
+        message: "Are you sure you want to logout?",
+        header: "Logout",
+        icon: "pi pi-exclamation-triangle",
+        rejectLabel: "No",
+        acceptLabel: "Yes",
+        accept: () => {
+          localStorage.clear();
+          this.accessToken = localStorage.getItem("token");
+        },
+        reject: () => {},
+      });
+    },
+  },
+  mounted() {
+    this.accessToken = localStorage.getItem("token");
   },
 };
 </script>
