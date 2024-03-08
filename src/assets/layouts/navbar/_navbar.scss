@@ -113,6 +113,14 @@
 
     .logout-btn {
       color: white;
+
+      @include m-phone {
+        display: none;
+      }
+
+      @include sm-phone {
+        display: none;
+      }
     }
   }
 }

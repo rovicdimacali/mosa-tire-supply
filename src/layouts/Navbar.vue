@@ -62,9 +62,17 @@
         active-class="active-link"
         >{{ link.name }}</RouterLink
       >
-      <RouterLink to="/login"
+      <RouterLink v-if="!accessToken" to="/login"
         ><Button icon="pi pi-sign-in" label="Login" class="login-btn"
       /></RouterLink>
+
+      <Button
+        v-if="accessToken"
+        icon="pi pi-sign-out"
+        label="Logout"
+        class="login-btn"
+        @click="logout()"
+      />
     </div>
   </Sidebar>
 </template>

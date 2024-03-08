@@ -63,6 +63,7 @@
       }
 
       .socmed {
+        margin: 10px 0 0 0;
         gap: 5px;
 
         .socmed-icon {
@@ -74,6 +75,23 @@
             color: var(--primary-color);
           }
         }
+      }
+    }
+
+    .footer-info:last-child {
+      @include lg-phone {
+        margin-top: 30px;
+        gap: 10px;
+      }
+
+      @include m-phone {
+        margin-top: 30px;
+        gap: 10px;
+      }
+
+      @include sm-phone {
+        margin-top: 30px;
+        gap: 10px;
       }
     }
   }
