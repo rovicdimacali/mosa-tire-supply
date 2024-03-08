@@ -28,7 +28,6 @@
           <small>#07 Quirino Highway Barangay Pasong Putik, Quezon City </small>
         </div>
         <div class="col">
-          <p>Social Media</p>
           <div class="socmed row">
             <a href="https://www.facebook.com/MosaTires" target="_blank"
               ><Icon icon="bi:facebook" class="socmed-icon"
