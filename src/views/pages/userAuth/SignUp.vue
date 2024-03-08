@@ -187,7 +187,6 @@ export default {
         } catch (error) {
           console.error(error);
           this.isError = error.response.data.message;
-          console.log(Array.isArray(this.isError));
         }
       }
       this.isLoading = false;

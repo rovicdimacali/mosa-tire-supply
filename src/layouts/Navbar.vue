@@ -83,8 +83,6 @@ export default {
   },
   methods: {
     logout() {
-      console.log("clicked");
-      console.log(this.$confirm.require);
       this.$confirm.require({
         message: "Are you sure you want to logout?",
         header: "Logout",
@@ -101,7 +99,6 @@ export default {
   },
   mounted() {
     this.accessToken = localStorage.getItem("token");
-    console.log(this.accessToken);
   },
 };
 </script>

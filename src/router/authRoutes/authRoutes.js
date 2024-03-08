@@ -27,7 +27,11 @@ const authRoutes = [
     path: "/otp",
     name: "OTP",
     component: OTP,
-    meta: { requiresGuest: true },
+    meta: {
+      requiresGuest: true,
+      requiresForgotPassword: true,
+      requiresSignUp: true,
+    },
   },
   {
     path: "/reset-password",

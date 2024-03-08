@@ -100,9 +100,7 @@ export default {
     async resetPass() {
       this.isLoading = true;
       this.resetpassObj.id = localStorage.getItem("userID");
-      console.log("pumasok");
       try {
-        console.log("pumasok 2");
         const response = await resetPasswordUser(this.resetpassObj);
         if (response) {
           localStorage.removeItem("userID");
