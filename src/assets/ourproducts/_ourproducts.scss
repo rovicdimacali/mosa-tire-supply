@@ -1,0 +1,14 @@
+@import "./products/products";
+@import "./dialogs/productdialogs";
+
+.our-products {
+  width: 100%;
+  background-color: var(--surface-200);
+
+  .products-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    margin-bottom: 100px;
+  }
+}

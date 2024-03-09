@@ -25,6 +25,9 @@ import InputOtp from "primevue/inputotp";
 import ConfirmDialog from "primevue/confirmdialog";
 import ConfirmationService from "primevue/confirmationservice";
 import Tooltip from "primevue/tooltip";
+import Dropdown from "primevue/dropdown";
+import Rating from "primevue/rating";
+import Dialog from "primevue/dialog";
 
 const app = createApp(App);
 
@@ -48,5 +51,8 @@ app.component("InputGroupAddon", InputGroupAddon);
 app.component("InputNumber", InputNumber);
 app.component("InputOtp", InputOtp);
 app.component("ConfirmDialog", ConfirmDialog);
+app.component("Dropdown", Dropdown);
+app.component("Rating", Rating);
+app.component("Dialog", Dialog);
 
 app.mount("#app");
