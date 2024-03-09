@@ -1,0 +1,86 @@
+.product-dialog {
+  .product-container {
+    @include lg-phone {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @include m-phone {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @include sm-phone {
+      display: flex;
+      flex-direction: column;
+    }
+    .image-container {
+      width: 1000px;
+      height: 100%;
+
+      @include lg-phone {
+        margin: auto;
+        width: 300px;
+        height: 100%;
+      }
+
+      @include m-phone {
+        margin: auto;
+        width: 300px;
+        height: 100%;
+      }
+
+      @include sm-phone {
+        margin: auto;
+        width: 300px;
+        height: 100%;
+      }
+      img {
+        width: 100%;
+      }
+    }
+
+    .product-content {
+      h1 {
+        margin: 0;
+      }
+
+      .price-rating {
+        gap: 20px;
+
+        p {
+          margin: 0;
+          font-weight: bold;
+          font-size: 20px;
+        }
+      }
+    }
+
+    .inputs-container {
+      margin-top: 10px;
+      gap: 10px;
+
+      .size-wrap {
+        gap: 10px;
+      }
+    }
+
+    .quantity-input {
+      #quantity {
+        width: 150px;
+        .p-inputtext {
+          width: 50px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .p-dialog-footer {
+    padding: 10px 20px;
+    .actions {
+      align-items: center;
+      gap: 5px;
+    }
+  }
+}

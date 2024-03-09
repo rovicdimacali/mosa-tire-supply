@@ -1,0 +1,54 @@
+@import "./components/productcard";
+
+.products {
+  .header {
+    margin: 20px 0 40px 0;
+
+    h1 {
+      margin: 30px 0 0 0;
+      font-family: "Ethnocentric Rg", sans-serif;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .dropdown-container {
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+
+    @include m-phone {
+      justify-content: center;
+    }
+
+    @include sm-phone {
+      justify-content: center;
+    }
+
+    label {
+      font-size: 20px;
+
+      @include m-phone {
+        display: none;
+      }
+
+      @include sm-phone {
+        display: none;
+      }
+    }
+
+    .dropdown-brands {
+      width: 200px;
+    }
+  }
+
+  .products-wrap {
+    justify-content: center;
+    gap: 20px;
+  }
+}

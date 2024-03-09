@@ -11,6 +11,14 @@
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
+  @include m-phone {
+    padding: 0 20px;
+  }
+
+  @include sm-phone {
+    padding: 0 20px;
+  }
+
   .burger-btn {
     color: white;
     display: none;
