@@ -1,4 +1,4 @@
-import OurProducts from "@/views/pages/userAuth/OurProducts.vue";
+import OurProducts from "@/views/applayouts/OurProducts.vue";
 
 const ourProductRoutes = [
   {
