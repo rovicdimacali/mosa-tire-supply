@@ -181,7 +181,7 @@ export default {
         try {
           const response = await signUpUser(this.signUpObj);
           if (response) {
-            localStorage.setItem("userID", response.object.id);
+            localStorage.setItem("userID", response.data.id);
             this.$router.push("/otp");
           }
         } catch (error) {

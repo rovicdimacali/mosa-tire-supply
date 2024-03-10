@@ -34,12 +34,10 @@ router.beforeEach((to, from, next) => {
     // If the route requires OTP and the user didn't come from the OTP page
     next({ name: "OTP" }); // Redirect to OTP page or another appropriate route
   } else if (
-    to.meta.requiresForgotPassword &&
-    from.name !== "Forgot Password"
+    (to.meta.requiresForgotPassword || to.meta.requiresSignUp) &&
+    (from.name !== "Forgot Password" || from.name !== "Sign Up")
   ) {
-    next({ name: "Forgot Password" });
-  } else if (to.meta.requiresSignUp && from.name !== "Sign Up") {
-    next({ name: "Sign Up" });
+    next({ name: "Login" });
   } else {
     next();
   }
