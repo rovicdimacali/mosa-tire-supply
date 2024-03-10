@@ -27,13 +27,14 @@
       <RouterLink v-if="!accessToken" to="/login"
         ><Button label="Login" class="login-btn"
       /></RouterLink>
-      <Button
-        v-tooltip.bottom="'Cart'"
-        icon="pi pi-shopping-cart"
-        rounded
-        outlined
-        class="cart-btn"
-      />
+      <RouterLink to="/cart"
+        ><Button
+          v-tooltip.bottom="'Cart'"
+          icon="pi pi-shopping-cart"
+          rounded
+          outlined
+          class="cart-btn"
+      /></RouterLink>
       <Button
         v-if="accessToken"
         v-tooltip.bottom="'Logout'"
@@ -100,6 +101,7 @@ export default {
         accept: () => {
           localStorage.clear();
           this.accessToken = localStorage.getItem("token");
+          this.$router.push("/");
         },
         reject: () => {},
       });

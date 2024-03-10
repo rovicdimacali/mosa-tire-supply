@@ -1,4 +1,5 @@
 <template>
+  <Toast />
   <ProductDialog
     v-if="isProductDialogVisible"
     :isVisible="isProductDialogVisible"
@@ -29,14 +30,7 @@
         v-for="product in products"
         :key="product.name"
         :product="product"
-        @click="
-          () => {
-            if (accessToken) {
-              isProductDialogVisible = true;
-              selectedProduct = product;
-            } else this.$router.push('/login');
-          }
-        "
+        @click="showProductDetails(product)"
       />
     </div>
   </div>
@@ -175,6 +169,24 @@ export default {
       isProductDialogVisible: false,
       accessToken: localStorage.getItem("token"),
     };
+  },
+  methods: {
+    showProductDetails(product) {
+      if (this.accessToken) {
+        this.isProductDialogVisible = true;
+        this.selectedProduct = product;
+      } else {
+        setTimeout(() => {
+          this.$toast.add({
+            severity: "info",
+            summary: "Info",
+            detail: "You have to be logged in first before viewing a product.",
+            life: 3000,
+          });
+        }, 50);
+        this.$router.push("/login");
+      }
+    },
   },
 };
 </script>

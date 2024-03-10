@@ -28,6 +28,10 @@ import Tooltip from "primevue/tooltip";
 import Dropdown from "primevue/dropdown";
 import Rating from "primevue/rating";
 import Dialog from "primevue/dialog";
+import Checkbox from "primevue/checkbox";
+import RadioButton from "primevue/radiobutton";
+import Toast from "primevue/toast";
+import ToastService from "primevue/toastservice";
 
 const app = createApp(App);
 
@@ -36,6 +40,7 @@ app.directive("tooltip", Tooltip);
 app.use(router);
 app.use(PrimeVue);
 app.use(ConfirmationService);
+app.use(ToastService);
 
 app.component("Icon", Icon);
 app.component("Button", Button);
@@ -54,5 +59,8 @@ app.component("ConfirmDialog", ConfirmDialog);
 app.component("Dropdown", Dropdown);
 app.component("Rating", Rating);
 app.component("Dialog", Dialog);
+app.component("Checkbox", Checkbox);
+app.component("RadioButton", RadioButton);
+app.component("Toast", Toast);
 
 app.mount("#app");

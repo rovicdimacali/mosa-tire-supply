@@ -1,5 +1,4 @@
 <template>
-  <Toast />
   <Dialog
     v-model:visible="localVisible"
     header="Product Details"

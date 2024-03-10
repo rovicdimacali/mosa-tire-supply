@@ -30,15 +30,15 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some((route) => route.meta.requiresGuest) && isAuthenticated) {
     // If the route requires guest (not authenticated) and the user is authenticated
     next({ name: "Home" }); // Redirect to home or another route
-  } else if (to.meta.requiresOtp && from.name !== "OTP") {
-    // If the route requires OTP and the user didn't come from the OTP page
-    const cameFromSignUpOrForgotPassword =
-      from.name === "Sign Up" || from.name === "Forgot Password";
-    if (!cameFromSignUpOrForgotPassword) {
-      next({ name: "Login" }); // Redirect to login or another appropriate route
-    } else {
-      next(); // Allow access to OTP page
-    }
+  } else if (to.meta.requiresAuth && !isAuthenticated) {
+    next({ name: "Login" });
+  } else if (to.meta.requiresGuest && isAuthenticated) {
+    next({ name: "Home" });
+  } else if (
+    (to.meta.requiresForgotPassword || to.meta.requiresSignUp) &&
+    !(from.name === "Forgot Password" || from.name === "Sign Up")
+  ) {
+    next({ name: "Login" });
   } else {
     next();
   }

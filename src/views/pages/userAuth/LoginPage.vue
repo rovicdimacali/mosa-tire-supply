@@ -1,4 +1,5 @@
 <template>
+  <Toast />
   <div class="login">
     <div class="overlay row">
       <div class="login-hero col">
