@@ -1,0 +1,276 @@
+.cart-page {
+  width: 100%;
+
+  .cart-col {
+    max-width: 1200px;
+    padding-block: 20px 0;
+    margin: 0 auto;
+    gap: 20px;
+
+    .cart-contents {
+      gap: 20px;
+      .cart-header {
+        padding: 20px;
+        align-items: center;
+        background: var(--surface-50);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        .header-title {
+          flex: 1 1 auto;
+
+          p {
+            margin: 0;
+            text-align: center;
+          }
+        }
+
+        .checkbox {
+          @include lg-phone {
+            width: 5% !important;
+          }
+
+          @include m-phone {
+            width: 10% !important;
+          }
+
+          @include sm-phone {
+            width: 10% !important;
+          }
+        }
+
+        .product {
+          @include lg-phone {
+            width: 90% !important;
+          }
+
+          @include m-phone {
+            width: 75% !important;
+          }
+
+          @include sm-phone {
+            width: 75% !important;
+          }
+        }
+
+        .size,
+        .quantity,
+        .unit-price,
+        .total-price {
+          @include lg-phone {
+            display: none;
+          }
+
+          @include m-phone {
+            display: none;
+          }
+
+          @include sm-phone {
+            display: none;
+          }
+        }
+
+        .actions {
+          @include lg-phone {
+            width: 10% !important;
+          }
+
+          @include m-phone {
+            width: 15% !important;
+          }
+
+          @include sm-phone {
+            width: 15% !important;
+          }
+        }
+      }
+
+      .cart-items {
+        background: var(--surface-50);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        .item {
+          align-items: center;
+          padding: 20px;
+          border: 1px solid #dddddd;
+
+          .item-info {
+            flex: 1 1 auto;
+            p {
+              margin: 0;
+              text-align: center;
+            }
+          }
+
+          .checkbox {
+            @include lg-phone {
+              width: 5% !important;
+            }
+
+            @include m-phone {
+              width: 10% !important;
+            }
+
+            @include sm-phone {
+              width: 10% !important;
+            }
+          }
+
+          .product {
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+
+            @include lg-phone {
+              width: 90% !important;
+            }
+
+            @include m-phone {
+              width: 75% !important;
+            }
+
+            @include sm-phone {
+              width: 75% !important;
+            }
+
+            img {
+              width: 100px;
+              height: 130px;
+              object-fit: cover;
+              object-position: center;
+
+              @include lg-phone {
+                width: 80px;
+                height: 100px;
+              }
+
+              @include m-phone {
+                width: 80px;
+                height: 100px;
+              }
+
+              @include sm-phone {
+                width: 80px;
+                height: 100px;
+              }
+            }
+
+            .product-info {
+              gap: 5px;
+
+              p {
+                font-weight: bold;
+                font-size: 20px;
+
+                @include lg-phone {
+                  font-size: 15px;
+                }
+
+                @include m-phone {
+                  font-size: 15px;
+                }
+
+                @include sm-phone {
+                  font-size: 15px;
+                }
+              }
+
+              small {
+                display: none;
+
+                @include lg-phone {
+                  display: block;
+                }
+
+                @include m-phone {
+                  display: block;
+                }
+
+                @include sm-phone {
+                  display: block;
+                }
+              }
+            }
+          }
+
+          .size,
+          .quantity,
+          .unit-price,
+          .total-price {
+            @include lg-phone {
+              display: none;
+            }
+
+            @include m-phone {
+              display: none;
+            }
+
+            @include sm-phone {
+              display: none;
+            }
+          }
+
+          .total-price {
+            p {
+              font-weight: bold;
+            }
+          }
+
+          .actions {
+            display: flex;
+            justify-content: center;
+
+            @include lg-phone {
+              width: 10% !important;
+            }
+
+            @include m-phone {
+              width: 15% !important;
+            }
+
+            @include sm-phone {
+              width: 15% !important;
+            }
+          }
+        }
+      }
+    }
+
+    .order-container {
+      bottom: 0;
+      position: sticky;
+      z-index: 2;
+      background: var(--surface-50);
+      padding: 20px;
+      align-items: center;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+      .checkout-col {
+        gap: 10px;
+        flex: 1 1 auto;
+        width: 50%;
+
+        .checkout-option {
+          align-items: center;
+          gap: 10px;
+
+          label {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .cost-action {
+        flex: 1 1 auto;
+        width: 50%;
+        align-items: flex-end;
+
+        p {
+          margin: 0;
+        }
+
+        .proceed-btn {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
