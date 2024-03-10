@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AppLayout from "../views/pages/AppLayout.vue";
-import Home from "../views/applayouts/Home.vue";
+import Home from "../views/applayouts/customer/Home.vue";
 import authRoutes from "./authRoutes/authRoutes";
 import ourProductRoutes from "./ourProductsRoutes/ourProductsRoutes";
 

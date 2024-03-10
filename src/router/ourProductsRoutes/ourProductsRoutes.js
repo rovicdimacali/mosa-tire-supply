@@ -1,5 +1,5 @@
-import OurProducts from "@/views/applayouts/OurProducts.vue";
-import Cart from "@/views/applayouts/Cart.vue";
+import OurProducts from "@/views/applayouts/customer/OurProducts.vue";
+import Cart from "@/views/applayouts/customer/Cart.vue";
 
 const ourProductRoutes = [
   {
