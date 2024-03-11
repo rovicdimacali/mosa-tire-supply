@@ -32,6 +32,9 @@ import Checkbox from "primevue/checkbox";
 import RadioButton from "primevue/radiobutton";
 import Toast from "primevue/toast";
 import ToastService from "primevue/toastservice";
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import Message from "primevue/message";
 
 const app = createApp(App);
 
@@ -62,5 +65,8 @@ app.component("Dialog", Dialog);
 app.component("Checkbox", Checkbox);
 app.component("RadioButton", RadioButton);
 app.component("Toast", Toast);
+app.component("DataTable", DataTable);
+app.component("Column", Column);
+app.component("Message", Message);
 
 app.mount("#app");

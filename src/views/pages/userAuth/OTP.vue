@@ -18,7 +18,7 @@
               class="logo"
             />
             <form
-              v-if="!isSignUpSuccess"
+              v-if="!isSignUpSuccess && !isResetOTPSuccess"
               class="otp-form col"
               @submit.prevent="otp"
             >
@@ -44,9 +44,14 @@
               />
             </form>
             <Success
-              v-if="isSignUpSuccess"
+              v-else-if="isSignUpSuccess"
               :message="'Congratulations! You have successfully Signed Up!'"
               :login="true"
+            />
+            <Success
+              v-else-if="isResetOTPSuccess"
+              :message="'We have sent the reset link to your email address. Please check your email.'"
+              :login="false"
             />
           </template>
         </Card>
@@ -70,6 +75,7 @@ export default {
       isError: null,
       previousRoute: null,
       isSignUpSuccess: false,
+      isResetOTPSuccess: false,
     };
   },
 
@@ -79,7 +85,7 @@ export default {
       try {
         if (this.previousRoute === "/forgot-password") {
           const response = await forgotOTPUser(this.otpObj);
-          if (response) this.$router.push("/reset-password");
+          if (response) this.isResetOTPSuccess = true;
         } else {
           await signUpOTPUser(this.otpObj);
           this.isSignUpSuccess = true;

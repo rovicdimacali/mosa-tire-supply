@@ -16,7 +16,7 @@
     </div>
     <div class="nav-links row">
       <RouterLink
-        v-for="link in links"
+        v-for="link in is_staff ? adminLinks : links"
         :key="link.name"
         :to="link.path"
         active-class="active-link"
@@ -57,7 +57,7 @@
     </template>
     <div class="sidebar-links col">
       <RouterLink
-        v-for="link in links"
+        v-for="link in is_staff ? adminLinks : links"
         :key="link.name"
         :to="link.path"
         active-class="active-link"
@@ -87,7 +87,15 @@ export default {
         { name: "Our Products", path: "/our-products" },
         { name: "Contact Us", path: "/contact-us" },
       ],
+      adminLinks: [
+        { name: "Accounts", path: "/admin-accounts" },
+        { name: "Products", path: "/admin-products" },
+        { name: "On-site Orders", path: "/admin-on-site-orders" },
+        { name: "Orders Management", path: "/admin-orders-management" },
+        { name: "Activity Logs", path: "/admin-activity-logs" },
+      ],
       accessToken: null,
+      is_staff: null,
     };
   },
   methods: {
@@ -109,6 +117,7 @@ export default {
   },
   mounted() {
     this.accessToken = localStorage.getItem("token");
+    this.is_staff = localStorage.getItem("is_staff") === "ADMINISTRATOR";
   },
 };
 </script>
