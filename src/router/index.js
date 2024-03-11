@@ -44,6 +44,8 @@ router.beforeEach((to, from, next) => {
     next({ name: "Login" });
   } else if (to.meta.requiresAdmin && !is_staff) {
     next({ name: "Home" });
+  } else if (to.path === "/admin-products" && isAuthenticated) {
+    next("/admin-products/brands");
   } else {
     next();
   }
