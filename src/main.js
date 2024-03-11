@@ -35,6 +35,9 @@ import ToastService from "primevue/toastservice";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Message from "primevue/message";
+import TabMenu from "primevue/tabmenu";
+import FileUpload from "primevue/fileupload";
+import ProgressSpinner from "primevue/progressspinner";
 
 const app = createApp(App);
 
@@ -68,5 +71,8 @@ app.component("Toast", Toast);
 app.component("DataTable", DataTable);
 app.component("Column", Column);
 app.component("Message", Message);
+app.component("TabMenu", TabMenu);
+app.component("FileUpload", FileUpload);
+app.component("ProgressSpinner", ProgressSpinner);
 
 app.mount("#app");

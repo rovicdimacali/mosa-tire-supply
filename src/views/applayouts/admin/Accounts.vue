@@ -4,7 +4,7 @@
       <h1>Accounts</h1>
       <div class="accounts wrap">
         <DataTable
-          :value="staffAccouts"
+          :value="staffAccounts"
           scrollable
           scrollHeight="400px"
           class="staff-table"
@@ -165,7 +165,7 @@ export default {
   },
   data() {
     return {
-      staffAccouts: null,
+      staffAccounts: null,
       customerAccounts: null,
       createAccountObj: {
         fullName: null,
@@ -236,7 +236,7 @@ export default {
     async fetchStaffAccounts() {
       try {
         const response = await getStaffAccounts();
-        this.staffAccouts = response || [];
+        this.staffAccounts = response || [];
       } catch (error) {
         console.error(error);
       }

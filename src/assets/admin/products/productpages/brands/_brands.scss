@@ -1,0 +1,9 @@
+@import "./addbranddialog";
+
+.brands-container {
+  gap: 20px;
+
+  .add-brand-btn {
+    align-self: flex-start;
+  }
+}
