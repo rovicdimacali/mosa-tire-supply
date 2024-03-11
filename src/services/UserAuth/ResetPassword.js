@@ -1,7 +1,7 @@
 import { instance as axios } from "../AxiosInstance";
 
-export async function resetPasswordUser(obj) {
-  const response = await axios.post(`/account/changePassword/${obj.id}`, obj);
+export async function resetPasswordUser(token, obj) {
+  const response = await axios.post(`/account/resetPassword/${token}/`, obj);
   return response.data;
 }
 

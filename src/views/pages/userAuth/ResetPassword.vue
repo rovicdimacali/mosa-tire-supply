@@ -99,11 +99,12 @@ export default {
   methods: {
     async resetPass() {
       this.isLoading = true;
-      this.resetpassObj.id = localStorage.getItem("userID");
       try {
-        const response = await resetPasswordUser(this.resetpassObj);
+        const response = await resetPasswordUser(
+          this.$route.query.resetToken,
+          this.resetpassObj
+        );
         if (response) {
-          localStorage.removeItem("userID");
           this.isResetSuccess = true;
         }
       } catch (error) {

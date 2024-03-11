@@ -3,6 +3,7 @@ import AppLayout from "../views/pages/AppLayout.vue";
 import Home from "../views/applayouts/customer/Home.vue";
 import authRoutes from "./authRoutes/authRoutes";
 import ourProductRoutes from "./ourProductsRoutes/ourProductsRoutes";
+import adminRoutes from "./adminRoutes/adminRoutes";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,7 @@ const router = createRouter({
           component: Home,
         },
         ...ourProductRoutes,
+        ...adminRoutes,
       ],
     },
     ...authRoutes,
@@ -26,6 +28,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem("token") !== null;
+  const is_staff = localStorage.getItem("is_staff") === "ADMINISTRATOR";
 
   if (to.matched.some((route) => route.meta.requiresGuest) && isAuthenticated) {
     // If the route requires guest (not authenticated) and the user is authenticated
@@ -39,6 +42,8 @@ router.beforeEach((to, from, next) => {
     !(from.name === "Forgot Password" || from.name === "Sign Up")
   ) {
     next({ name: "Login" });
+  } else if (to.meta.requiresAdmin && !is_staff) {
+    next({ name: "Home" });
   } else {
     next();
   }
