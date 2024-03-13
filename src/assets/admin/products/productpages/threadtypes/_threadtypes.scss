@@ -1,0 +1,24 @@
+@import "./addthreadtypedialog";
+
+.threadtype-container {
+  gap: 20px;
+  .threadtype-table {
+    .header-row {
+      justify-content: space-between;
+      align-items: center;
+
+      h3 {
+        margin: 0;
+      }
+
+      .action-row {
+        gap: 5px;
+        align-items: center;
+      }
+    }
+
+    .action-row {
+      gap: 5px;
+    }
+  }
+}

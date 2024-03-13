@@ -1,0 +1,41 @@
+.add-threadtype-dialog {
+  .add-threadtype-form {
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+
+    .basic-inputs {
+      justify-content: stretch;
+      align-items: end;
+      gap: 5px;
+      width: 100%;
+
+      .brand-container {
+        flex: 1 1 auto;
+        width: 100%;
+        justify-content: start;
+        align-items: start;
+
+        .dropdown {
+          width: 100%;
+        }
+      }
+
+      .type-container {
+        width: 100%;
+
+        .input {
+          width: 100%;
+        }
+      }
+
+      .description-container {
+        width: 100%;
+      }
+    }
+  }
+
+  .actions {
+    gap: 5px;
+  }
+}

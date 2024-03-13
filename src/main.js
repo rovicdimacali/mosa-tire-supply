@@ -16,6 +16,8 @@ import Carousel from "primevue/carousel";
 import Card from "primevue/card";
 import Image from "primevue/image";
 import InputText from "primevue/inputtext";
+import IconField from "primevue/iconfield";
+import InputIcon from "primevue/inputicon";
 import Password from "primevue/password";
 import FloatLabel from "primevue/floatlabel";
 import InputGroup from "primevue/inputgroup";
@@ -38,6 +40,7 @@ import Message from "primevue/message";
 import TabMenu from "primevue/tabmenu";
 import FileUpload from "primevue/fileupload";
 import ProgressSpinner from "primevue/progressspinner";
+import Editor from "primevue/editor";
 
 const app = createApp(App);
 
@@ -56,6 +59,8 @@ app.component("Card", Card);
 app.component("Image", Image);
 app.component("FloatLabel", FloatLabel);
 app.component("InputText", InputText);
+app.component("IconField", IconField);
+app.component("InputIcon", InputIcon);
 app.component("Password", Password);
 app.component("InputGroup", InputGroup);
 app.component("InputGroupAddon", InputGroupAddon);
@@ -74,5 +79,6 @@ app.component("Message", Message);
 app.component("TabMenu", TabMenu);
 app.component("FileUpload", FileUpload);
 app.component("ProgressSpinner", ProgressSpinner);
+app.component("Editor", Editor);
 
 app.mount("#app");

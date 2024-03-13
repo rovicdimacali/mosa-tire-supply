@@ -3,7 +3,19 @@
 .brands-container {
   gap: 20px;
 
-  .add-brand-btn {
-    align-self: flex-start;
+  .header-row {
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      margin: 0;
+    }
+    .add-brand-btn {
+      align-self: flex-start;
+    }
+  }
+
+  .action-row {
+    gap: 5px;
   }
 }
