@@ -11,6 +11,18 @@
     "
     @success="handleSuccess"
   />
+  <EditThreadTypeDialog
+    v-if="isEditThreadTypeDialogVisible"
+    :isVisible="isEditThreadTypeDialogVisible"
+    :brands="brands"
+    :threadType="selectedThreadType"
+    @close="
+      () => {
+        isEditThreadTypeDialogVisible = false;
+      }
+    "
+    @success="handleSuccess"
+  />
   <div class="threadtype-container col">
     <DataTable
       :value="threadTypes"
@@ -77,14 +89,14 @@
             <Button
               icon="pi pi-pencil"
               @click="
-                brandToEdit = slotProps.data;
-                isEditBrandDialogVisible = true;
+                selectedThreadType = slotProps.data;
+                isEditThreadTypeDialogVisible = true;
               "
             ></Button>
             <Button
               icon="pi pi-trash"
               severity="danger"
-              @click="removeBrand(slotProps.data.id)"
+              @click="removeThreadType(slotProps.data.id)"
             ></Button>
           </div> </template
       ></Column>
@@ -97,18 +109,22 @@ import {
   getBrands,
   getThreadTypes,
   searchThreadTypes,
+  deleteThreadType,
 } from "@/services/Admin/Products.js";
 import AddThreadTypeDialog from "@/components/admin/Products/components/ThreadTypes/AddThreadTypeDialog.vue";
+import EditThreadTypeDialog from "@/components/admin/Products/components/ThreadTypes/EditThreadTypeDialog.vue";
 import _ from "lodash";
 
 export default {
-  components: { AddThreadTypeDialog },
+  components: { AddThreadTypeDialog, EditThreadTypeDialog },
   data() {
     return {
       brands: null,
       threadTypes: null,
+      selectedThreadType: null,
       selectedBrand: null,
       isAddThreadTypeDialogVisible: false,
+      isEditThreadTypeDialogVisible: false,
       searchValue: "",
     };
   },
@@ -121,7 +137,7 @@ export default {
 
     async fetchThreadTypes() {
       const response = await getThreadTypes(this.selectedBrand);
-      this.threadTypes = response || [];
+      this.threadTypes = response.reverse() || [];
     },
 
     async searchThreadType() {
@@ -131,7 +147,7 @@ export default {
       } else {
         response = await getThreadTypes(this.selectedBrand);
       }
-      this.threadTypes = response || [];
+      this.threadTypes = response.reverse() || [];
     },
 
     debouncedSearchThreadType: _.debounce(function () {
@@ -140,13 +156,45 @@ export default {
 
     handleSuccess() {
       this.isAddThreadTypeDialogVisible = false;
+      this.isEditThreadTypeDialogVisible = false;
       this.$toast.add({
         severity: "success",
         summary: "Success",
         detail: "Brand Added Successfully.",
         life: 3000,
       });
-      this.fetchBrands();
+      this.fetchThreadTypes();
+    },
+
+    removeThreadType(id) {
+      this.$confirm.require({
+        message: "Are you sure you want to delete this Thread Type?",
+        header: "Delete",
+        icon: "pi pi-exclamation-triangle",
+        rejectLabel: "No",
+        acceptLabel: "Yes",
+        accept: async () => {
+          try {
+            await deleteThreadType(id);
+            this.$toast.add({
+              severity: "success",
+              summary: "Success",
+              detail: "ThreadType Deleted Successfully.",
+              life: 3000,
+            });
+            this.fetchThreadTypes();
+          } catch (error) {
+            console.error(error);
+            this.$toast.add({
+              severity: "error",
+              summary: "Error",
+              detail: "ThreadType Deletion was Unsuccessful.",
+              life: 3000,
+            });
+          }
+        },
+        reject: () => {},
+      });
     },
   },
 
