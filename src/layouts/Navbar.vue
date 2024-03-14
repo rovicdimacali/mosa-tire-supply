@@ -110,6 +110,7 @@ export default {
           localStorage.clear();
           this.accessToken = localStorage.getItem("token");
           this.$router.push("/");
+          window.location.reload();
         },
         reject: () => {},
       });
