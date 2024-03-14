@@ -61,6 +61,7 @@
         :key="link.name"
         :to="link.path"
         active-class="active-link"
+        @click="sidebarVisible = false"
         >{{ link.name }}</RouterLink
       >
       <RouterLink v-if="!accessToken" to="/login"
