@@ -61,6 +61,7 @@
         :key="link.name"
         :to="link.path"
         active-class="active-link"
+        @click="sidebarVisible = false"
         >{{ link.name }}</RouterLink
       >
       <RouterLink v-if="!accessToken" to="/login"
@@ -110,6 +111,7 @@ export default {
           localStorage.clear();
           this.accessToken = localStorage.getItem("token");
           this.$router.push("/");
+          window.location.reload();
         },
         reject: () => {},
       });
