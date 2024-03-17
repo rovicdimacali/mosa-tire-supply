@@ -14,12 +14,18 @@
   >
     <div class="product-container row">
       <div class="image-container">
-        <Image :src="product?.imageSrc" />
+        <Image :src="product?.imageUrl" />
       </div>
       <div class="product-content col">
-        <h1>{{ product?.name }}</h1>
+        <h1>{{ product?.type }}</h1>
         <div class="price-rating row">
-          <p>Php {{ product?.price.toLocaleString() }}</p>
+          <p>
+            {{
+              selectedPrice !== null
+                ? `₱${selectedPrice?.toLocaleString()}`
+                : `₱${product?.minPrice.toLocaleString()} - ₱${product?.maxPrice.toLocaleString()}`
+            }}
+          </p>
           <Rating
             v-model="product.rating"
             readonly
@@ -38,6 +44,7 @@
                 filter
                 placeholder="Width"
                 class="w-full md:w-14rem"
+                @change="handleAspectRatioSelection()"
               />
             </div>
             <div class="size-inputs col">
@@ -49,6 +56,8 @@
                 filter
                 placeholder="Aspect Ratio"
                 class="w-full md:w-14rem"
+                :disabled="selectedWidth === null"
+                @change="handleDiameterSelection()"
               />
             </div>
             <div class="size-inputs col">
@@ -60,6 +69,8 @@
                 filter
                 placeholder="Rim Diameter"
                 class="w-full md:w-14rem"
+                :disabled="selectedAspectRatio === null"
+                @change="handleSelectedPrice"
               />
             </div>
           </div>
@@ -100,17 +111,75 @@ export default {
     return {
       localVisible: true,
       loading: false,
-      width: ["22", "24", "28"],
-      aspectRatio: ["22", "24", "28"],
+      width: null,
+      aspectRatio: null,
       diameter: ["22", "24", "28"],
       selectedWidth: null,
       selectedAspectRatio: null,
       selectedDiameter: null,
-      quantity: null,
+      selectedPrice: null,
+      quantity: 1,
     };
+  },
+  methods: {
+    handleAspectRatioSelection() {
+      // Find all items in this.product.detail where the width matches selectedWidth
+      const matchingItems = this.product.detail.filter(
+        (item) => item.width === this.selectedWidth
+      );
+      console.log(matchingItems);
+      // If matching items are found, extract their aspectRatio values
+      if (matchingItems.length > 0) {
+        this.aspectRatio = matchingItems.flatMap((item) => item.aspectRatio);
+      } else {
+        // Handle case where no matching item is found
+        console.error(
+          `No item found with width equal to ${this.selectedWidth}`
+        );
+        // Reset aspectRatio if no matching item is found
+        this.aspectRatio = [];
+      }
+    },
+    handleDiameterSelection() {
+      const matchingItems = this.product.detail.filter(
+        (item) =>
+          item.width === this.selectedWidth &&
+          item.aspectRatio === this.selectedAspectRatio
+      );
+      if (matchingItems.length > 0) {
+        // If there are multiple matching items, extract diameters from all items
+        if (matchingItems.length > 1) {
+          this.diameter = matchingItems.map((item) => item.diameter);
+          // Flatten the array of diameters
+          this.diameter = this.diameter.flat();
+        } else {
+          // If there's only one matching item, directly assign its diameter
+          this.diameter = [matchingItems[0].diameter]; // Wrap diameter in an array
+        }
+      } else {
+        console.error(
+          `No item found with width equal to ${this.selectedWidth} and aspect ratio ${this.selectedAspectRatio}`
+        );
+        this.diameter = [];
+      }
+    },
+
+    handleSelectedPrice() {
+      const matchingItems = this.product.detail.filter(
+        (item) =>
+          item.width === this.selectedWidth &&
+          item.aspectRatio === this.selectedAspectRatio &&
+          item.diameter === this.selectedDiameter
+      );
+      console.log(matchingItems);
+      this.selectedPrice = matchingItems[0].price;
+      console.log(this.selectedPrice);
+    },
   },
   mounted() {
     this.localVisible = this.isVisible;
+    console.log(this.product.detail);
+    this.width = this.product.detail.map((item) => item.width);
   },
   watch: {
     isVisible(newVal) {

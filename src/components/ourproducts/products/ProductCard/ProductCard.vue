@@ -1,10 +1,14 @@
 <template>
   <Card class="product-card">
     <template #content>
-      <Image :src="product?.imageSrc" class="product-img" />
+      <Image :src="product?.imageUrl" class="product-img" />
       <div class="product-details col">
-        <p>{{ product?.name }}</p>
-        <small>Php {{ product?.price.toLocaleString() }}</small>
+        <p>{{ product?.type }}</p>
+        <small
+          >₱{{ product?.minPrice.toLocaleString() }} - ₱{{
+            product?.maxPrice.toLocaleString()
+          }}</small
+        >
       </div>
       <div class="actions row">
         <Rating
