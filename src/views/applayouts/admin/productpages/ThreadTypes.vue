@@ -94,6 +94,8 @@
               "
             ></Button>
             <Button
+              :loading="isDeleting"
+              :key="slotProps.data.id"
               icon="pi pi-trash"
               severity="danger"
               @click="removeThreadType(slotProps.data.id)"
@@ -126,6 +128,7 @@ export default {
       isAddThreadTypeDialogVisible: false,
       isEditThreadTypeDialogVisible: false,
       searchValue: "",
+      isDeleting: false,
     };
   },
 
@@ -160,7 +163,7 @@ export default {
       this.$toast.add({
         severity: "success",
         summary: "Success",
-        detail: "Brand Added Successfully.",
+        detail: "Thread Type Added Successfully.",
         life: 3000,
       });
       this.fetchThreadTypes();
@@ -175,6 +178,7 @@ export default {
         acceptLabel: "Yes",
         accept: async () => {
           try {
+            this.isDeleting = true;
             await deleteThreadType(id);
             this.$toast.add({
               severity: "success",
@@ -191,6 +195,8 @@ export default {
               detail: "ThreadType Deletion was Unsuccessful.",
               life: 3000,
             });
+          } finally {
+            this.isDeleting = false;
           }
         },
         reject: () => {},

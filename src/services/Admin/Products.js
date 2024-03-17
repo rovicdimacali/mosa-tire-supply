@@ -1,4 +1,7 @@
-import { instance as axios } from "../AxiosInstance";
+import {
+  instance as axios,
+  uploadInstance as axiosUpload,
+} from "../AxiosInstance";
 
 //Brands
 
@@ -54,5 +57,48 @@ export async function updateThreadType(id, obj) {
 
 export async function deleteThreadType(id) {
   const response = await axios.delete(`/threadType/deleteThreadType/${id}/`);
+  return response.data;
+}
+
+//Thread Variants
+
+export async function getThreadTypeDetails() {
+  const response = await axios.get("/threadTypeDetails/getAllDetails/");
+  return response.data;
+}
+
+export async function addThreadTypeDetails(file) {
+  const response = await axiosUpload.post(
+    "/threadTypeDetails/addFileDetails/",
+    file
+  );
+  return response.data;
+}
+
+export async function addThreadTypeDetail(obj) {
+  const response = await axios.post("/threadTypeDetails/addDetails/", obj);
+  return response.data;
+}
+
+export async function updateThreadTypeDetail(id, obj) {
+  const response = await axios.put(
+    `/threadTypeDetails/updateDetails/${id}`,
+    obj
+  );
+  return response.data;
+}
+
+export async function deleteThreadTypeDetail(id) {
+  const response = await axios.delete(`/threadTypeDetails/deleteDetails/${id}`);
+  return response.data;
+}
+
+export async function deleteThreadTypeDetails(obj) {
+  const response = await axios.post(`/threadTypeDetails/bulkDelete/`, obj);
+  return response.data;
+}
+
+export async function addStocks(obj) {
+  const response = await axios.put("/threadTypeDetails/addStock/", obj);
   return response.data;
 }
