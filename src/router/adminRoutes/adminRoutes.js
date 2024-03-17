@@ -10,6 +10,7 @@ const adminRoutes = [
     name: "Admin Accounts",
     component: Accounts,
     meta: {
+      requiresAuth: true,
       requiresAdmin: true,
     },
   },
@@ -18,6 +19,7 @@ const adminRoutes = [
     name: "Admin Products",
     component: Products,
     meta: {
+      requiresAuth: true,
       requiresAdmin: true,
     },
     children: [
@@ -26,6 +28,7 @@ const adminRoutes = [
         name: "Product Brands",
         component: Brands,
         meta: {
+          requiresAuth: true,
           requiresAdmin: true,
         },
       },
@@ -34,6 +37,7 @@ const adminRoutes = [
         name: "Product Thread Types",
         component: ThreadTypes,
         meta: {
+          requiresAuth: true,
           requiresAdmin: true,
         },
       },
@@ -42,6 +46,7 @@ const adminRoutes = [
         name: "Product Thread Variants",
         component: ThreadVariants,
         meta: {
+          requiresAuth: true,
           requiresAdmin: true,
         },
       },
