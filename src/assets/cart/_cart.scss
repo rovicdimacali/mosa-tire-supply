@@ -248,12 +248,24 @@
         flex: 1 1 auto;
         width: 50%;
 
+        p {
+          margin: 0;
+          font-weight: bold;
+          font-size: 25px;
+        }
+
         .checkout-option {
-          align-items: center;
+          justify-content: start;
+          align-items: start;
           gap: 10px;
 
-          label {
-            font-size: 15px;
+          p {
+            font-size: 20px;
+            margin: 0;
+          }
+
+          small {
+            margin: 0;
           }
         }
       }

@@ -108,7 +108,7 @@ export default {
         rejectLabel: "No",
         acceptLabel: "Yes",
         accept: () => {
-          localStorage.clear();
+          localStorage.removeItem("token");
           this.accessToken = localStorage.getItem("token");
           this.$router.push("/");
           window.location.reload();

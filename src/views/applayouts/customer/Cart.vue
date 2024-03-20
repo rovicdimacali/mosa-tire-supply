@@ -30,22 +30,26 @@
           </div>
         </div>
         <div class="cart-items col">
-          <div class="item row" v-for="(item, index) in items" :key="index">
+          <div
+            class="item row"
+            v-for="item in cartItems"
+            :key="item.cartOrderId"
+          >
             <div class="item-info checkbox" style="width: 3%">
               <Checkbox
                 v-model="selectedItems"
-                :inputId="index"
+                :inputId="item.cartOrderId"
                 :value="item"
               />
             </div>
             <div class="item-info product row" style="width: 35%">
-              <Image :src="item.imageSrc" />
+              <Image :src="item.imageUrl" />
               <div class="product-info col">
-                <p>{{ item.threadType }}</p>
+                <p>{{ item.details.threadType }}</p>
                 <small
-                  >Size: {{ item.width }}/{{ item.aspectRatio }}/{{
-                    item.diameter
-                  }}</small
+                  >Size: {{ item.details.width }}/{{
+                    item.details.aspectRatio
+                  }}/{{ item.details.diameter }}</small
                 >
                 <small>Qty: {{ item.quantity }}</small>
                 <small
@@ -55,10 +59,14 @@
               </div>
             </div>
             <div class="item-info size" style="width: 15%">
-              <p>{{ item.width }}/{{ item.aspectRatio }}/{{ item.diameter }}</p>
+              <p>
+                {{ item.details.width }}/{{ item.details.aspectRatio }}/{{
+                  item.details.diameter
+                }}
+              </p>
             </div>
             <div class="item-info unit-price" style="width: 14%">
-              <p>Php {{ item.unit_price.toLocaleString() }}</p>
+              <p>Php {{ item.details.price.toLocaleString() }}</p>
             </div>
             <div class="item-info quantity" style="width: 7%">
               <p>{{ item.quantity }}</p>
@@ -75,30 +83,25 @@
       <div class="order-container row">
         <div class="checkout-col col">
           <p>CHECKOUT OPTIONS</p>
-          <div
-            v-for="checkoutOption in checkoutOptions"
-            :key="checkoutOption.id"
-            class="checkout-option row"
-          >
-            <RadioButton
-              v-model="selectedOption"
-              :inputId="checkoutOption.id"
-              :value="checkoutOption"
-            />
-            <div class="col">
-              <label :for="checkoutOption.id" class="col"
-                >{{ checkoutOption.option }}
-                <small>
-                  {{ checkoutOption.description }}
-                </small>
-              </label>
-            </div>
+          <div v-if="isOnlineOrder" class="checkout-option col">
+            <p>Online Order</p>
+            <small
+              >We require 50% downpayment upon checkout of the selected
+              items.</small
+            >
+          </div>
+          <div v-if="isKioskOrder" class="checkout-option col">
+            <p>Kiosk Order</p>
+            <small
+              >We will provide you a queuing number upon checkout of the
+              selected items.</small
+            >
           </div>
         </div>
         <div class="cost-action col">
           <small>Total:</small>
           <p>Php {{ totalCost ? totalCost?.toLocaleString() : 0 }}</p>
-          <Button label="Proceed" class="proceed-btn" />
+          <Button label="Proceed" class="proceed-btn" @click="checkoutItems" />
         </div>
       </div>
     </div>
@@ -106,35 +109,13 @@
 </template>
 
 <script>
+import { getCartItems, checkoutCartItems } from "@/services/Products/Products";
 export default {
   data() {
     return {
       selectAll: false,
       selectedItems: null,
-      items: [
-        {
-          threadType: "HiCOUNTRY HT2",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219738/prinx/HiCountry-HT2_zpkvy0.png",
-          width: "165",
-          aspectRatio: "65",
-          plyRating: "R13",
-          unit_price: 4890,
-          quantity: 1,
-          totalPrice: 4890,
-        },
-        {
-          threadType: "HiRACE HZ2 A/S",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219671/prinx/HiRace_mzycjm.png",
-          width: "165",
-          aspectRatio: "65",
-          plyRating: "R13",
-          unit_price: 5200,
-          quantity: 1,
-          totalPrice: 5200,
-        },
-      ],
+      cartItems: null,
       selectedOption: null,
       checkoutOptions: [
         {
@@ -148,6 +129,9 @@ export default {
           description: "Order onsite to queue your order.",
         },
       ],
+      isKioskOrder: false,
+      isOnlineOrder: false,
+      checkouts: null,
     };
   },
   computed: {
@@ -166,11 +150,45 @@ export default {
         this.selectedItems = [];
       }
     },
+
+    async fetchCart() {
+      try {
+        const response = await getCartItems();
+        this.cartItems = response || [];
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async checkoutItems() {
+      const itemArray = this.selectedItems.map((item) => item.cartOrderId);
+      try {
+        const response = await checkoutCartItems({ ids: itemArray });
+        if (response && response.carts.length > 0) {
+          this.$router.push({
+            name: "Checkout",
+            query: {
+              checkouts: btoa(JSON.stringify(response)),
+            },
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
   watch: {
     selectedItems(newItems) {
       console.log("Selected Items:", newItems);
     },
+  },
+  mounted() {
+    this.fetchCart();
+    if (localStorage.getItem("token")) {
+      this.isOnlineOrder = true;
+    } else if (localStorage.getItem("kioskToken")) {
+      this.isKioskOrder = localStorage.getItem("kioskToken");
+    }
   },
 };
 </script>

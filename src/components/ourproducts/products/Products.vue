@@ -9,6 +9,7 @@
         isProductDialogVisible = false;
       }
     "
+    @success="handleSuccess"
   />
   <div class="products">
     <div class="header">
@@ -42,6 +43,7 @@
 import { getBrands, getThreadTypes } from "@/services/Admin/Products";
 import ProductCard from "./ProductCard/ProductCard.vue";
 import ProductDialog from "../dialogs/ProductDialog.vue";
+import { h } from "vue";
 export default {
   components: { ProductCard, ProductDialog },
   data() {
@@ -55,21 +57,19 @@ export default {
     };
   },
   methods: {
+    handleSuccess() {
+      this.isProductDialogVisible = false;
+      this.$toast.add({
+        severity: "success",
+        summary: "Success",
+        detail: "Item added to cart",
+        life: 3000,
+      });
+    },
+
     showProductDetails(product) {
-      if (this.accessToken) {
-        this.isProductDialogVisible = true;
-        this.selectedProduct = product;
-      } else {
-        setTimeout(() => {
-          this.$toast.add({
-            severity: "info",
-            summary: "Info",
-            detail: "You have to be logged in first before viewing a product.",
-            life: 3000,
-          });
-        }, 50);
-        this.$router.push("/login");
-      }
+      this.isProductDialogVisible = true;
+      this.selectedProduct = product;
     },
 
     async fetchBrands() {

@@ -94,6 +94,7 @@ export default {
       try {
         const response = await loginUser(this.loginObj);
         if (response) {
+          localStorage.removeItem("kioskToken");
           localStorage.setItem("token", response.accessToken);
           localStorage.setItem("userID", response.accountDto.id);
           localStorage.setItem("name", response.accountDto.fullname);
