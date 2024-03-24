@@ -200,7 +200,7 @@ export default {
     handleAspectRatioSelection() {
       // Find all items in this.product.detail where the width matches selectedWidth
       const matchingItems = this.product.detail.filter(
-        (item) => item.width === this.orderForm.width
+        (item) => item.width === this.orderForm.width,
       );
       console.log(matchingItems);
       // If matching items are found, extract their aspectRatio values
@@ -209,7 +209,7 @@ export default {
       } else {
         // Handle case where no matching item is found
         console.error(
-          `No item found with width equal to ${this.orderForm.width}`
+          `No item found with width equal to ${this.orderForm.width}`,
         );
         // Reset aspectRatio if no matching item is found
         this.aspectRatio = [];
@@ -220,7 +220,7 @@ export default {
       const matchingItems = this.product.detail.filter(
         (item) =>
           item.width === this.orderForm.width &&
-          item.aspectRatio === this.orderForm.aspectRatio
+          item.aspectRatio === this.orderForm.aspectRatio,
       );
       if (matchingItems.length > 0) {
         // If there are multiple matching items, extract diameters from all items
@@ -234,7 +234,7 @@ export default {
         }
       } else {
         console.error(
-          `No item found with width equal to ${this.orderForm.width} and aspect ratio ${this.orderForm.aspectRatio}`
+          `No item found with width equal to ${this.orderForm.width} and aspect ratio ${this.orderForm.aspectRatio}`,
         );
         this.diameter = [];
       }
@@ -245,7 +245,7 @@ export default {
         (item) =>
           item.width === this.orderForm.width &&
           item.aspectRatio === this.orderForm.aspectRatio &&
-          item.diameter === this.orderForm.diameter
+          item.diameter === this.orderForm.diameter,
       );
 
       if (matchingItems.length > 0) {
@@ -260,7 +260,7 @@ export default {
         }
       } else {
         console.error(
-          `No item found with width equal to ${this.orderForm.width}, aspect ratio ${this.orderForm.aspectRatio}, and ${this.orderForm.diameter}`
+          `No item found with width equal to ${this.orderForm.width}, aspect ratio ${this.orderForm.aspectRatio}, and ${this.orderForm.diameter}`,
         );
         this.sidewall = [];
       }
@@ -271,7 +271,7 @@ export default {
         (item) =>
           item.width === this.orderForm.width &&
           item.aspectRatio === this.orderForm.aspectRatio &&
-          item.diameter === this.orderForm.diameter
+          item.diameter === this.orderForm.diameter,
       );
       if (matchingItems.length > 0) {
         if (matchingItems.length > 1) {
@@ -288,7 +288,7 @@ export default {
         }
       } else {
         console.error(
-          `No item found with width equal to ${this.orderForm.width}, aspect ratio ${this.orderForm.aspectRatio}, and ${this.orderForm.diameter}`
+          `No item found with width equal to ${this.orderForm.width}, aspect ratio ${this.orderForm.aspectRatio}, and ${this.orderForm.diameter}`,
         );
         this.plyRating = [];
       }
@@ -301,7 +301,7 @@ export default {
             item.aspectRatio === this.orderForm.aspectRatio &&
             item.diameter === this.orderForm.diameter &&
             item.sidewall === this.orderForm.sidewall) ||
-          item.plyRating === this.orderForm.plyRating
+          item.plyRating === this.orderForm.plyRating,
       );
       this.selectedPrice = matchingItems[0].price;
     },
@@ -313,7 +313,7 @@ export default {
             item.aspectRatio === this.orderForm.aspectRatio &&
             item.diameter === this.orderForm.diameter &&
             item.sidewall === this.orderForm.sidewall) ||
-          item.plyRating === this.orderForm.plyRating
+          item.plyRating === this.orderForm.plyRating,
       );
       this.stocks = matchingItems[0].stocks;
     },

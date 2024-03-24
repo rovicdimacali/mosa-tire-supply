@@ -75,7 +75,13 @@
               <p>Php {{ item.totalPrice.toLocaleString() }}</p>
             </div>
             <div class="item-info actions" style="width: 10%">
-              <Button icon="pi pi-trash" severity="danger" rounded raised />
+              <Button
+                icon="pi pi-trash"
+                severity="danger"
+                rounded
+                raised
+                @click="deleteFromCart(item.cartOrderId)"
+              />
             </div>
           </div>
         </div>
@@ -109,7 +115,11 @@
 </template>
 
 <script>
-import { getCartItems, checkoutCartItems } from "@/services/Products/Products";
+import {
+  getCartItems,
+  checkoutCartItems,
+  removeCartItem,
+} from "@/services/Products/Products";
 export default {
   data() {
     return {
@@ -138,14 +148,14 @@ export default {
     totalCost() {
       return this.selectedItems?.reduce(
         (sum, item) => sum + item.totalPrice,
-        0
+        0,
       );
     },
   },
   methods: {
     handleSelectAll() {
       if (this.selectAll) {
-        this.selectedItems = [...this.items];
+        this.selectedItems = [...this.cartItems];
       } else {
         this.selectedItems = [];
       }
@@ -155,6 +165,15 @@ export default {
       try {
         const response = await getCartItems();
         this.cartItems = response || [];
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async deleteFromCart(id) {
+      try {
+        await removeCartItem(id);
+        this.fetchCart();
       } catch (error) {
         console.error(error);
       }

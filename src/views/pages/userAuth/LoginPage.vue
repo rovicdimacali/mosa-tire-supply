@@ -45,8 +45,8 @@
                     isError?.includes('incorrect')
                       ? true
                       : isError
-                      ? true
-                      : false
+                        ? true
+                        : false
                   "
                 />
               </div>

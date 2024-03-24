@@ -30,7 +30,7 @@ instance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 uploadInstance.interceptors.request.use(
@@ -43,7 +43,7 @@ uploadInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 instance.interceptors.response.use(
@@ -61,7 +61,7 @@ instance.interceptors.response.use(
       router.push("/");
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 uploadInstance.interceptors.response.use(
@@ -79,5 +79,5 @@ uploadInstance.interceptors.response.use(
       router.push("/");
     }
     return Promise.reject(error);
-  }
+  },
 );

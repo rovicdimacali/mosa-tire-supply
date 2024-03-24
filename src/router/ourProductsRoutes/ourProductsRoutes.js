@@ -1,6 +1,7 @@
 import OurProducts from "@/views/applayouts/customer/OurProducts.vue";
 import Cart from "@/views/applayouts/customer/Cart.vue";
 import Checkout from "@/views/applayouts/customer/Checkout.vue";
+import MyOrders from "@/views/applayouts/customer/MyOrders.vue";
 
 const ourProductRoutes = [
   {
@@ -25,6 +26,14 @@ const ourProductRoutes = [
       requiresFromCart: true,
     },
     props: (route) => ({ checkouts: route.query.checkouts }),
+  },
+  {
+    path: "/my-orders",
+    name: "My Orders",
+    component: MyOrders,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 

@@ -190,7 +190,7 @@ export default {
     const contactNumberValidator = helpers.regex(/^9\d{9}$/);
     const contactNumberWithMessage = helpers.withMessage(
       "Incorrect Contact Number.",
-      contactNumberValidator
+      contactNumberValidator,
     );
     return {
       createAccountObj: {
@@ -205,20 +205,20 @@ export default {
           required,
           minLength: helpers.withMessage(
             "Password must be 8 characters long.",
-            minLength(8)
+            minLength(8),
           ),
         },
         confirmPassword: {
           required,
           sameAsPassword: helpers.withMessage(
             "Confirm Password must be the same with Password.",
-            sameAs(this.createAccountObj.password)
+            sameAs(this.createAccountObj.password),
           ),
         },
         contactNumber: {
           required: helpers.withMessage(
             "Contact Number is required.",
-            required
+            required,
           ),
         },
         userRole: {

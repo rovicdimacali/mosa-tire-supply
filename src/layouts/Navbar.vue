@@ -86,7 +86,7 @@ export default {
       links: [
         { name: "Home", path: "/home" },
         { name: "Our Products", path: "/our-products" },
-        { name: "Contact Us", path: "/contact-us" },
+        { name: "My Orders", path: "/my-orders" },
       ],
       adminLinks: [
         { name: "Accounts", path: "/admin-accounts" },

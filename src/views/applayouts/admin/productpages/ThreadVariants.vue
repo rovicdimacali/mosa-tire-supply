@@ -229,7 +229,7 @@ export default {
           .filter((detail) => detail !== null);
         const mergedDetails = tireDetails.reduce(
           (acc, curr) => acc.concat(curr),
-          []
+          [],
         );
         this.threadVariants = mergedDetails;
         console.log(this.threadTypes);
@@ -247,7 +247,7 @@ export default {
           .filter((detail) => detail !== null);
         const mergedDetails = tireDetails.reduce(
           (acc, curr) => acc.concat(curr),
-          []
+          [],
         );
         this.threadVariants = mergedDetails;
       } else {

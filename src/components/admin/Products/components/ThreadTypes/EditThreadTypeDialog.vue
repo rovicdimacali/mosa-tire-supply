@@ -119,7 +119,7 @@ export default {
       formData.append("file", file);
       formData.append(
         "upload_preset",
-        import.meta.env.VITE_CLOUDINARY_UNSIGNED_PRESET
+        import.meta.env.VITE_CLOUDINARY_UNSIGNED_PRESET,
       );
       formData.append("folder", import.meta.env.VITE_CLOUDINARY_BRANDS_FOLDER);
       try {

@@ -39,8 +39,8 @@
                     isError?.includes('incorrect')
                       ? true
                       : isError
-                      ? true
-                      : false
+                        ? true
+                        : false
                   "
                 />
               </div>
@@ -56,8 +56,8 @@
                     isError?.includes('incorrect')
                       ? true
                       : isError
-                      ? true
-                      : false
+                        ? true
+                        : false
                   "
                 />
               </div>
@@ -102,7 +102,7 @@ export default {
       try {
         const response = await resetPasswordUser(
           this.$route.query.resetToken,
-          this.resetpassObj
+          this.resetpassObj,
         );
         if (response) {
           this.isResetSuccess = true;

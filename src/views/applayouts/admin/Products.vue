@@ -50,7 +50,7 @@ export default {
   },
   created() {
     this.activeIndex = this.tabs.findIndex(
-      (tab) => tab.to === this.$route.path
+      (tab) => tab.to === this.$route.path,
     );
   },
 };

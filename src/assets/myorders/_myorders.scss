@@ -1,0 +1,24 @@
+.my-orders-page {
+  width: 100%;
+
+  .my-orders-col {
+    max-width: 1200px;
+    padding-block: 20px 0;
+    margin: 0 auto;
+    gap: 20px;
+
+    .my-orders-header {
+      background-color: var(--surface-50);
+      padding-inline: 20px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+      h3 {
+        font-size: 20px;
+      }
+    }
+
+    .my-orders-contents {
+      gap: 20px;
+    }
+  }
+}

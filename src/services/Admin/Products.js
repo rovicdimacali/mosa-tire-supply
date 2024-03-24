@@ -37,7 +37,7 @@ export async function getThreadTypes(brand) {
 
 export async function searchThreadTypes(searchValue) {
   const response = await axios.get(
-    `/threadType/searchThreadType/${searchValue}`
+    `/threadType/searchThreadType/${searchValue}`,
   );
   return response.data;
 }
@@ -45,7 +45,7 @@ export async function searchThreadTypes(searchValue) {
 export async function addThreadTypes(threadyTypeArray) {
   const response = await axios.post(
     "/threadType/addThreadType/",
-    threadyTypeArray
+    threadyTypeArray,
   );
   return response.data;
 }
@@ -70,7 +70,7 @@ export async function getThreadTypeDetails() {
 export async function addThreadTypeDetails(file) {
   const response = await axiosUpload.post(
     "/threadTypeDetails/addFileDetails/",
-    file
+    file,
   );
   return response.data;
 }
@@ -83,7 +83,7 @@ export async function addThreadTypeDetail(obj) {
 export async function updateThreadTypeDetail(id, obj) {
   const response = await axios.put(
     `/threadTypeDetails/updateDetails/${id}`,
-    obj
+    obj,
   );
   return response.data;
 }

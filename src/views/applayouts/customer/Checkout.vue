@@ -67,7 +67,12 @@
             label="Proceed"
             class="proceed-btn"
             :disabled="isDisabled"
-            @click="isSuccessDialogVisible = true"
+            @click="
+              async () => {
+                onPayCheckout();
+                isSuccessDialogVisible = true;
+              }
+            "
           />
         </div>
       </div>
@@ -77,7 +82,7 @@
 
 <script>
 import CheckoutSuccessDialog from "@/components/ourproducts/dialogs/CheckoutSuccessDialog.vue";
-import { cancelCheckout } from "@/services/Products/Products";
+import { cancelCheckout, payCheckout } from "@/services/Products/Products";
 export default {
   components: { CheckoutSuccessDialog },
   props: ["checkouts"],
@@ -85,31 +90,6 @@ export default {
     return {
       selectAll: false,
       selectedItems: null,
-      items: [
-        {
-          threadType: "HiCOUNTRY HT2",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219738/prinx/HiCountry-HT2_zpkvy0.png",
-          width: "165",
-          aspectRatio: "65",
-          plyRating: "R13",
-          unit_price: 4890,
-          quantity: 1,
-          totalPrice: 4890,
-        },
-        {
-          threadType: "HiRACE HZ2 A/S",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219671/prinx/HiRace_mzycjm.png",
-          width: "165",
-          aspectRatio: "65",
-          plyRating: "R13",
-          unit_price: 5200,
-          quantity: 1,
-          totalPrice: 5200,
-          referenceNumber: "",
-        },
-      ],
       selectedOption: null,
       options: ["Gcash", "BPI"],
       selectedPaymentMethod: "Gcash",
@@ -118,6 +98,7 @@ export default {
       isOnlineOrder: false,
       isSuccessDialogVisible: false,
       checkouts: null,
+      referenceNumber: null,
     };
   },
   computed: {
@@ -147,6 +128,19 @@ export default {
         console.error(error);
       }
     },
+
+    async onPayCheckout() {
+      const itemArray = this.checkouts.carts.map((item) => item.cartOrderId);
+      try {
+        await payCheckout({
+          refNo: this.referenceNumber,
+          paymentMethod: this.selectedPaymentMethod,
+          ids: itemArray,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
   watch: {
     selectedItems(newItems) {
@@ -160,9 +154,12 @@ export default {
     } else if (localStorage.getItem("kioskToken")) {
       this.isKioskOrder = localStorage.getItem("kioskToken");
     }
+
+    window.addEventListener("beforeunload", this.onCancelCheckout);
   },
-  unmounted() {
-    this.onCancelCheckout();
+
+  beforeUnmount() {
+    window.removeEventListener("beforeunload", this.onCancelCheckout);
   },
 };
 </script>
