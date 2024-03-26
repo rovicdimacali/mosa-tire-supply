@@ -37,7 +37,11 @@ router.beforeEach((to, from, next) => {
     next({ name: "Login" });
   } else if (to.meta.requiresGuest && isAuthenticated) {
     next({ name: "Home" });
-  } else if (to.meta.requiresFromCart && !(from.name === "Cart")) {
+  } else if (
+    to.meta.requiresFromCart &&
+    from.name !== "Cart" &&
+    from.name !== "Our Products"
+  ) {
     next({ name: "Home" });
   } else if (
     (to.meta.requiresForgotPassword || to.meta.requiresSignUp) &&

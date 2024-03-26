@@ -64,15 +64,11 @@
           <small>Downpayment:</small>
           <p>Php {{ checkouts?.priceToPay.toLocaleString() }}</p>
           <Button
+            :loading="isLoading"
             label="Proceed"
             class="proceed-btn"
             :disabled="isDisabled"
-            @click="
-              async () => {
-                onPayCheckout();
-                isSuccessDialogVisible = true;
-              }
-            "
+            @click="onPayCheckout"
           />
         </div>
       </div>
@@ -99,6 +95,7 @@ export default {
       isSuccessDialogVisible: false,
       checkouts: null,
       referenceNumber: null,
+      isLoading: false,
     };
   },
   computed: {
@@ -130,6 +127,7 @@ export default {
     },
 
     async onPayCheckout() {
+      this.isLoading = true;
       const itemArray = this.checkouts.carts.map((item) => item.cartOrderId);
       try {
         await payCheckout({
@@ -137,8 +135,11 @@ export default {
           paymentMethod: this.selectedPaymentMethod,
           ids: itemArray,
         });
+        this.isSuccessDialogVisible = true;
       } catch (error) {
         console.error(error);
+      } finally {
+        this.isLoading = false;
       }
     },
   },

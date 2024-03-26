@@ -107,7 +107,12 @@
         <div class="cost-action col">
           <small>Total:</small>
           <p>Php {{ totalCost ? totalCost?.toLocaleString() : 0 }}</p>
-          <Button label="Proceed" class="proceed-btn" @click="checkoutItems" />
+          <Button
+            label="Proceed"
+            class="proceed-btn"
+            @click="checkoutItems"
+            :disabled="checkSelectedItems"
+          />
         </div>
       </div>
     </div>
@@ -141,6 +146,7 @@ export default {
       ],
       isKioskOrder: false,
       isOnlineOrder: false,
+      isDisabled: false,
       checkouts: null,
     };
   },
@@ -148,8 +154,15 @@ export default {
     totalCost() {
       return this.selectedItems?.reduce(
         (sum, item) => sum + item.totalPrice,
-        0,
+        0
       );
+    },
+    checkSelectedItems() {
+      if (this.selectedItems === null) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   methods: {
@@ -165,6 +178,8 @@ export default {
       try {
         const response = await getCartItems();
         this.cartItems = response || [];
+        this.selectedItems = this.cartItems.map((item) => item);
+        this.selectAll = true;
       } catch (error) {
         console.error(error);
       }
@@ -196,11 +211,20 @@ export default {
       }
     },
   },
+
   watch: {
-    selectedItems(newItems) {
-      console.log("Selected Items:", newItems);
+    selectedItems: {
+      handler(newSelectedItems) {
+        if (newSelectedItems.length === this.cartItems.length) {
+          this.selectAll = true;
+        } else {
+          this.selectAll = false;
+        }
+      },
+      deep: true,
     },
   },
+
   mounted() {
     this.fetchCart();
     if (localStorage.getItem("token")) {

@@ -20,6 +20,11 @@ export async function checkoutCartItems(obj) {
   return response.data;
 }
 
+export async function orderNowItems(obj) {
+  const response = await axios.post("/cart/orderNow/", obj);
+  return response.data;
+}
+
 export async function cancelCheckout(obj) {
   const response = await axios.post("/cart/cancelCheckout/", obj);
   return response.data;

@@ -151,23 +151,23 @@
     </div>
     <template #footer>
       <div class="actions row">
-        <Button label="Add to Cart" @click="handleCartSubmit" />
+        <Button
+          label="Add to Cart"
+          @click="handleCartSubmit"
+          :disabled="disableAddToCart"
+        />
         <Button
           label="Order Now"
           severity="info"
-          @click="
-            () => {
-              cartOrOrder = 'order';
-              isOrderTypeDialogVisible = true;
-            }
-          "
+          @click="orderNow"
+          :disabled="disableOrderNow"
         />
       </div>
     </template>
   </Dialog>
 </template>
 <script>
-import { addItemToCart } from "@/services/Products/Products";
+import { addItemToCart, orderNowItems } from "@/services/Products/Products";
 import OrderTypeDialog from "./OrderTypeDialog.vue";
 export default {
   components: { OrderTypeDialog },
@@ -196,11 +196,30 @@ export default {
       isOrderTypeDialogVisible: false,
     };
   },
+  computed: {
+    disableOrderNow() {
+      return (
+        !this.orderForm.width ||
+        !this.orderForm.aspectRatio ||
+        !this.orderForm.diameter ||
+        !this.orderForm.sidewall
+      );
+    },
+    disableAddToCart() {
+      return (
+        !this.orderForm.width ||
+        !this.orderForm.aspectRatio ||
+        !this.orderForm.diameter ||
+        !this.orderForm.sidewall
+      );
+    },
+  },
+
   methods: {
     handleAspectRatioSelection() {
       // Find all items in this.product.detail where the width matches selectedWidth
       const matchingItems = this.product.detail.filter(
-        (item) => item.width === this.orderForm.width,
+        (item) => item.width === this.orderForm.width
       );
       console.log(matchingItems);
       // If matching items are found, extract their aspectRatio values
@@ -209,7 +228,7 @@ export default {
       } else {
         // Handle case where no matching item is found
         console.error(
-          `No item found with width equal to ${this.orderForm.width}`,
+          `No item found with width equal to ${this.orderForm.width}`
         );
         // Reset aspectRatio if no matching item is found
         this.aspectRatio = [];
@@ -220,7 +239,7 @@ export default {
       const matchingItems = this.product.detail.filter(
         (item) =>
           item.width === this.orderForm.width &&
-          item.aspectRatio === this.orderForm.aspectRatio,
+          item.aspectRatio === this.orderForm.aspectRatio
       );
       if (matchingItems.length > 0) {
         // If there are multiple matching items, extract diameters from all items
@@ -234,7 +253,7 @@ export default {
         }
       } else {
         console.error(
-          `No item found with width equal to ${this.orderForm.width} and aspect ratio ${this.orderForm.aspectRatio}`,
+          `No item found with width equal to ${this.orderForm.width} and aspect ratio ${this.orderForm.aspectRatio}`
         );
         this.diameter = [];
       }
@@ -245,7 +264,7 @@ export default {
         (item) =>
           item.width === this.orderForm.width &&
           item.aspectRatio === this.orderForm.aspectRatio &&
-          item.diameter === this.orderForm.diameter,
+          item.diameter === this.orderForm.diameter
       );
 
       if (matchingItems.length > 0) {
@@ -260,7 +279,7 @@ export default {
         }
       } else {
         console.error(
-          `No item found with width equal to ${this.orderForm.width}, aspect ratio ${this.orderForm.aspectRatio}, and ${this.orderForm.diameter}`,
+          `No item found with width equal to ${this.orderForm.width}, aspect ratio ${this.orderForm.aspectRatio}, and ${this.orderForm.diameter}`
         );
         this.sidewall = [];
       }
@@ -271,7 +290,7 @@ export default {
         (item) =>
           item.width === this.orderForm.width &&
           item.aspectRatio === this.orderForm.aspectRatio &&
-          item.diameter === this.orderForm.diameter,
+          item.diameter === this.orderForm.diameter
       );
       if (matchingItems.length > 0) {
         if (matchingItems.length > 1) {
@@ -288,7 +307,7 @@ export default {
         }
       } else {
         console.error(
-          `No item found with width equal to ${this.orderForm.width}, aspect ratio ${this.orderForm.aspectRatio}, and ${this.orderForm.diameter}`,
+          `No item found with width equal to ${this.orderForm.width}, aspect ratio ${this.orderForm.aspectRatio}, and ${this.orderForm.diameter}`
         );
         this.plyRating = [];
       }
@@ -301,7 +320,7 @@ export default {
             item.aspectRatio === this.orderForm.aspectRatio &&
             item.diameter === this.orderForm.diameter &&
             item.sidewall === this.orderForm.sidewall) ||
-          item.plyRating === this.orderForm.plyRating,
+          item.plyRating === this.orderForm.plyRating
       );
       this.selectedPrice = matchingItems[0].price;
     },
@@ -313,7 +332,7 @@ export default {
             item.aspectRatio === this.orderForm.aspectRatio &&
             item.diameter === this.orderForm.diameter &&
             item.sidewall === this.orderForm.sidewall) ||
-          item.plyRating === this.orderForm.plyRating,
+          item.plyRating === this.orderForm.plyRating
       );
       this.stocks = matchingItems[0].stocks;
     },
@@ -327,6 +346,32 @@ export default {
         try {
           await addItemToCart(this.orderForm);
           this.$emit("success");
+        } catch (error) {
+          console.error(error);
+          this.$toast.add({
+            severity: "error",
+            summary: "Error",
+            detail: "Error Occured",
+            life: 3000,
+          });
+        }
+      }
+    },
+
+    async orderNow() {
+      const token = localStorage.getItem("token");
+      if (token === null) {
+        this.cartOrOrder = "cart";
+        this.isOrderTypeDialogVisible = true;
+      } else {
+        try {
+          const response = await orderNowItems(this.orderForm);
+          this.$router.push({
+            name: "Checkout",
+            query: {
+              checkouts: btoa(JSON.stringify(response)),
+            },
+          });
         } catch (error) {
           console.error(error);
           this.$toast.add({

@@ -6,15 +6,24 @@
       </div>
       <div class="my-orders-content col">
         <DataTable
-          :value="customers"
+          :value="myOrders?.cartOrders"
           scrollable
           scrollHeight="400px"
           tableStyle="min-width: 50rem"
         >
-          <Column field="name" header="Name"></Column>
-          <Column field="country.name" header="Country"></Column>
-          <Column field="representative.name" header="Representative"></Column>
-          <Column field="company" header="Company"></Column>
+          <template #header>
+            Remaning amount to pay: {{ myOrders?.totalCartPrice }}
+          </template>
+          <Column field="threadType" header="Thread Type"> </Column>
+          <Column header="Size">
+            <template #body="slotProps">
+              {{ slotProps.data?.details?.width }}/{{
+                slotProps.data?.details?.aspectRatio
+              }}/{{ slotProps.data?.details?.diameter }}
+            </template>
+          </Column>
+          <Column field="quantity" header="Quantity"></Column>
+          <Column field="orderStatus" header="Status"></Column>
         </DataTable>
       </div>
     </div>
@@ -25,14 +34,16 @@
 import { getUserOrders } from "@/services/Products/Products";
 export default {
   data() {
-    return {};
+    return {
+      myOrders: null,
+    };
   },
 
   methods: {
     async fetchUserOrders() {
       try {
         const response = await getUserOrders();
-        console.log(response);
+        this.myOrders = response || [];
       } catch (error) {
         console.error(error);
       }
