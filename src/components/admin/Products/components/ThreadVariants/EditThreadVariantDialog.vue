@@ -130,7 +130,6 @@ export default {
   mounted() {
     this.threadTypeArray = this.threadTypes.map((item) => item.type);
     this.localVisible = this.isVisible;
-    console.log(this.threadTypes);
   },
   watch: {
     isVisible(newVal) {

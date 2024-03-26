@@ -229,10 +229,9 @@ export default {
           .filter((detail) => detail !== null);
         const mergedDetails = tireDetails.reduce(
           (acc, curr) => acc.concat(curr),
-          [],
+          []
         );
         this.threadVariants = mergedDetails;
-        console.log(this.threadTypes);
       } catch (error) {
         console.error(error);
       }
@@ -247,7 +246,7 @@ export default {
           .filter((detail) => detail !== null);
         const mergedDetails = tireDetails.reduce(
           (acc, curr) => acc.concat(curr),
-          [],
+          []
         );
         this.threadVariants = mergedDetails;
       } else {
@@ -262,7 +261,6 @@ export default {
     async addThreadTypeDetailFile(event) {
       this.isUploading = true;
       const file = event.files[0];
-      console.log(file);
       const formData = new FormData();
       formData.append("file", file);
       try {
@@ -355,11 +353,6 @@ export default {
   mounted() {
     this.fetchBrands();
     this.fetchThreadTypeDetails();
-  },
-  watch: {
-    selectedProduct(newVal) {
-      console.log(newVal);
-    },
   },
 };
 </script>

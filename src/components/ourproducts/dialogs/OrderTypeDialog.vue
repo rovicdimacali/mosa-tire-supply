@@ -49,7 +49,7 @@
 import {
   addItemToCart,
   startKioskOrder,
-  addKioskItemToCart,
+  addKioskOrder,
 } from "@/services/Products/Products";
 export default {
   props: ["isVisible", "cartOrOrder", "item"],
@@ -97,9 +97,9 @@ export default {
             try {
               if (localStorage.getItem("kioskToken") === null) {
                 const response = await startKioskOrder();
-                localStorage.setItem("kioskToken", response.kioskNumber);
+                localStorage.setItem("kioskToken", response.kioskToken);
               }
-              await addKioskItemToCart(this.item);
+              await addKioskOrder(this.item);
               this.$emit("success");
             } catch (error) {
               console.error(error);
@@ -131,8 +131,6 @@ export default {
   },
   mounted() {
     this.localVisible = this.isVisible;
-    console.log(this.item);
-    console.log(this.cartOrOrder);
   },
   watch: {
     isVisible(newVal) {

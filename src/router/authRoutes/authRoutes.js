@@ -40,12 +40,10 @@ const authRoutes = [
     meta: { requiresGuest: true },
     beforeEnter: (to, from, next) => {
       const resetToken = to.query.resetToken;
-      console.log("Reset Token:", resetToken);
 
       if (resetToken) {
         next();
       } else {
-        console.log("Redirecting to Login");
         next({ name: "Login" });
       }
     },

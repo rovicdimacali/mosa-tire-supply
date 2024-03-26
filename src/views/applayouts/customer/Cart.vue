@@ -80,7 +80,7 @@
                 severity="danger"
                 rounded
                 raised
-                @click="deleteFromCart(item.cartOrderId)"
+                @click="deleteFromCart(item)"
               />
             </div>
           </div>
@@ -122,8 +122,11 @@
 <script>
 import {
   getCartItems,
+  getKioskCart,
   checkoutCartItems,
   removeCartItem,
+  deleteKioskOrder,
+  checkoutKioskOrder,
 } from "@/services/Products/Products";
 export default {
   data() {
@@ -176,18 +179,30 @@ export default {
 
     async fetchCart() {
       try {
-        const response = await getCartItems();
-        this.cartItems = response || [];
+        if (localStorage.getItem("token")) {
+          const response = await getCartItems();
+          this.cartItems = response || [];
+        } else if (localStorage.getItem("kioskToken")) {
+          const response = await getKioskCart();
+          this.cartItems = response || [];
+        }
+
         this.selectedItems = this.cartItems.map((item) => item);
-        this.selectAll = true;
+        if (this.selectedItems.length !== 0) {
+          this.selectAll = true;
+        }
       } catch (error) {
         console.error(error);
       }
     },
 
-    async deleteFromCart(id) {
+    async deleteFromCart(item) {
       try {
-        await removeCartItem(id);
+        if (localStorage.getItem("token")) {
+          await removeCartItem(item.cartOrderIdid);
+        } else if (localStorage.getItem("kioskToken")) {
+          await deleteKioskOrder(item.kioskId);
+        }
         this.fetchCart();
       } catch (error) {
         console.error(error);
@@ -195,16 +210,29 @@ export default {
     },
 
     async checkoutItems() {
-      const itemArray = this.selectedItems.map((item) => item.cartOrderId);
       try {
-        const response = await checkoutCartItems({ ids: itemArray });
-        if (response && response.carts.length > 0) {
-          this.$router.push({
-            name: "Checkout",
-            query: {
-              checkouts: btoa(JSON.stringify(response)),
-            },
-          });
+        if (localStorage.getItem("token")) {
+          const itemArray = this.selectedItems.map((item) => item.cartOrderId);
+          const response = await checkoutCartItems({ ids: itemArray });
+          if (response && response.carts.length > 0) {
+            this.$router.push({
+              name: "Checkout",
+              query: {
+                checkouts: btoa(JSON.stringify(response)),
+              },
+            });
+          }
+        } else if (localStorage.getItem("kioskToken")) {
+          const itemArray = this.selectedItems.map((item) => item.kioskId);
+          const response = await checkoutKioskOrder({ ids: itemArray });
+          if (response && response.kiosks.length > 0) {
+            this.$router.push({
+              name: "Queuing",
+              query: {
+                checkouts: btoa(JSON.stringify(response)),
+              },
+            });
+          }
         }
       } catch (error) {
         console.error(error);

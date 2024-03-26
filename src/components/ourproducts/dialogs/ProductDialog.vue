@@ -167,7 +167,12 @@
   </Dialog>
 </template>
 <script>
-import { addItemToCart, orderNowItems } from "@/services/Products/Products";
+import {
+  addItemToCart,
+  orderNowItems,
+  addKioskOrder,
+  orderNowKiosk,
+} from "@/services/Products/Products";
 import OrderTypeDialog from "./OrderTypeDialog.vue";
 export default {
   components: { OrderTypeDialog },
@@ -221,7 +226,6 @@ export default {
       const matchingItems = this.product.detail.filter(
         (item) => item.width === this.orderForm.width
       );
-      console.log(matchingItems);
       // If matching items are found, extract their aspectRatio values
       if (matchingItems.length > 0) {
         this.aspectRatio = matchingItems.flatMap((item) => item.aspectRatio);
@@ -339,12 +343,18 @@ export default {
 
     async handleCartSubmit() {
       const token = localStorage.getItem("token");
-      if (token === null) {
+      const kioskToken = localStorage.getItem("kioskToken");
+
+      if (token === null && kioskToken === null) {
         this.cartOrOrder = "cart";
         this.isOrderTypeDialogVisible = true;
       } else {
         try {
-          await addItemToCart(this.orderForm);
+          if (token) {
+            await addItemToCart(this.orderForm);
+          } else if (kioskToken) {
+            await addKioskOrder(this.orderForm);
+          }
           this.$emit("success");
         } catch (error) {
           console.error(error);
@@ -360,18 +370,30 @@ export default {
 
     async orderNow() {
       const token = localStorage.getItem("token");
-      if (token === null) {
+      const kioskToken = localStorage.getItem("kioskToken");
+
+      if (token === null && kioskToken === null) {
         this.cartOrOrder = "cart";
         this.isOrderTypeDialogVisible = true;
       } else {
         try {
-          const response = await orderNowItems(this.orderForm);
-          this.$router.push({
-            name: "Checkout",
-            query: {
-              checkouts: btoa(JSON.stringify(response)),
-            },
-          });
+          if (token) {
+            const response = await orderNowItems(this.orderForm);
+            this.$router.push({
+              name: "Checkout",
+              query: {
+                checkouts: btoa(JSON.stringify(response)),
+              },
+            });
+          } else if (kioskToken) {
+            const response = await orderNowKiosk(this.orderForm);
+            this.$router.push({
+              name: "Queuing",
+              query: {
+                checkouts: btoa(JSON.stringify(response)),
+              },
+            });
+          }
         } catch (error) {
           console.error(error);
           this.$toast.add({
@@ -386,7 +408,6 @@ export default {
   },
   mounted() {
     this.localVisible = this.isVisible;
-    console.log(this.product);
     this.width = [...new Set(this.product.detail.map((item) => item.width))];
   },
   watch: {

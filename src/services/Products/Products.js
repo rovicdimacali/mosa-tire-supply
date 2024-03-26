@@ -45,8 +45,34 @@ export async function startKioskOrder() {
   return response.data;
 }
 
-export async function addKioskItemToCart(obj) {
+export async function getKioskCart() {
   const kioskToken = localStorage.getItem("kioskToken");
-  const response = await axios.post(`/kiosk/addItem/${kioskToken}`, obj);
+  const response = await axios.get(`/kiosk/getAllCurrentOrders/${kioskToken}`);
+  return response.data;
+}
+
+export async function addKioskOrder(obj) {
+  const kioskToken = localStorage.getItem("kioskToken");
+  const response = await axios.post(`/kiosk/addOrder/${kioskToken}`, obj);
+  return response.data;
+}
+
+export async function deleteKioskOrder(id) {
+  const kioskToken = localStorage.getItem("kioskToken");
+  const response = await axios.delete(
+    `/kiosk/removeOrder/?orderId=${id}&kioskToken=${kioskToken}`
+  );
+  return response.data;
+}
+
+export async function checkoutKioskOrder(obj) {
+  const kioskToken = localStorage.getItem("kioskToken");
+  const response = await axios.post(`/kiosk/checkout/${kioskToken}`, obj);
+  return response.data;
+}
+
+export async function orderNowKiosk(obj) {
+  const kioskToken = localStorage.getItem("kioskToken");
+  const response = await axios.post(`/kiosk/orderNow/${kioskToken}`, obj);
   return response.data;
 }

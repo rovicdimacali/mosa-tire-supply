@@ -130,7 +130,6 @@ export default {
   },
   mounted() {
     this.localVisible = this.isVisible;
-    console.log(this.threadTypes);
   },
   watch: {
     isVisible(newVal) {

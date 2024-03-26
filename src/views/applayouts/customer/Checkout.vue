@@ -143,11 +143,7 @@ export default {
       }
     },
   },
-  watch: {
-    selectedItems(newItems) {
-      console.log("Selected Items:", newItems);
-    },
-  },
+
   mounted() {
     this.checkouts = JSON.parse(atob(this.$route.query.checkouts));
     if (localStorage.getItem("token")) {
