@@ -230,7 +230,9 @@ export default {
       );
       // If matching items are found, extract their aspectRatio values
       if (matchingItems.length > 0) {
-        this.aspectRatio = matchingItems.flatMap((item) => item.aspectRatio);
+        this.aspectRatio = [
+          ...new Set(matchingItems.flatMap((item) => item.aspectRatio)),
+        ];
       } else {
         // Handle case where no matching item is found
         console.error(
@@ -250,7 +252,9 @@ export default {
       if (matchingItems.length > 0) {
         // If there are multiple matching items, extract diameters from all items
         if (matchingItems.length > 1) {
-          this.diameter = matchingItems.map((item) => item.diameter);
+          this.diameter = [
+            ...new Set(matchingItems.flatMap((item) => item.diameter)),
+          ];
           // Flatten the array of diameters
           this.diameter = this.diameter.flat();
         } else {

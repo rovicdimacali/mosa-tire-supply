@@ -110,6 +110,8 @@ export default {
         accept: () => {
           localStorage.removeItem("token");
           this.accessToken = localStorage.getItem("token");
+          localStorage.removeItem("is_staff");
+          this.is_staff = null;
           this.$router.push("/");
           window.location.reload();
         },
