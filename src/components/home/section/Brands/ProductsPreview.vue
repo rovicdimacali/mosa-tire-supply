@@ -15,16 +15,18 @@
           <template #content>
             <div class="item col">
               <div class="image-container">
-                <Image :src="slotProps.data.imageSrc" preview />
+                <Image :src="slotProps.data.imageUrl" preview />
               </div>
               <div class="item-details row">
                 <div class="col">
-                  <p>{{ slotProps.data.name }}</p>
-                  <small>Prinx</small>
+                  <p>{{ slotProps.data.type }}</p>
+                  <small>{{ slotProps.data.brandName }}</small>
                 </div>
 
                 <div class="actions row">
-                  <Button icon="pi pi-shopping-cart" class="ml-2" />
+                  <RouterLink to="/our-products"
+                    ><Button icon="pi pi-shopping-cart" class="ml-2"
+                  /></RouterLink>
                 </div>
               </div>
             </div>
@@ -32,81 +34,20 @@
         </Card>
       </template>
     </Carousel>
-    <Button label="Show More" class="show-more-btn" />
+    <RouterLink to="/our-products" class="show-more-btn"
+      ><Button label="Show More"
+    /></RouterLink>
   </div>
 </template>
 
 <script>
-import { EventBus } from "@/services/EventBus";
+import { getThreadTypes } from "@/services/Admin/Products";
 
 export default {
+  props: ["brand"],
   data() {
     return {
       products: null,
-      prinxProducts: [
-        {
-          name: "HiRACE HZ2 A/S",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219671/prinx/HiRace_mzycjm.png",
-        },
-        {
-          name: "HiCITY HH2",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219704/prinx/HiCity_o1bbmu.png",
-        },
-        {
-          name: "HiCOUNTRY HT2",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219738/prinx/HiCountry-HT2_zpkvy0.png",
-        },
-        {
-          name: "HiCOUNTRY HA2",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219771/prinx/HiCountry-HA2_kzbxnr.png",
-        },
-        {
-          name: "HiCOUNTRY HM1",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219800/prinx/HiCountry-HM1_udjpf9.png",
-        },
-        {
-          name: "HiFREE HV1",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219883/prinx/HiFree_ztoqvq.jpg",
-        },
-      ],
-      sunnyProducts: [
-        {
-          name: "SUNNY HZ2 A/S",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219671/prinx/HiRace_mzycjm.png",
-        },
-        {
-          name: "SUNNY HH2",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219704/prinx/HiCity_o1bbmu.png",
-        },
-        {
-          name: "SUNNY HT2",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219738/prinx/HiCountry-HT2_zpkvy0.png",
-        },
-        {
-          name: "SUNNY HA2",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219771/prinx/HiCountry-HA2_kzbxnr.png",
-        },
-        {
-          name: "SUNNY HM1",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219800/prinx/HiCountry-HM1_udjpf9.png",
-        },
-        {
-          name: "SUNNY HV1",
-          imageSrc:
-            "https://res.cloudinary.com/dpm5vdakr/image/upload/v1709219883/prinx/HiFree_ztoqvq.jpg",
-        },
-      ],
       responsiveOptions: [
         {
           breakpoint: "1400px",
@@ -132,12 +73,19 @@ export default {
     };
   },
 
+  methods: {
+    async fetchThreadTypes() {
+      try {
+        const response = await getThreadTypes(this.brand?.name);
+        this.products = response || [];
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+
   mounted() {
-    EventBus.on("brandSelected", (brand) => {
-      this.products =
-        brand.name === "Prinx" ? this.prinxProducts : this.sunnyProducts;
-    });
-    this.products = this.prinxProducts;
+    this.fetchThreadTypes();
   },
 };
 </script>

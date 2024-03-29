@@ -1,0 +1,17 @@
+.checkout-success-dialog {
+  .checkout-success-col {
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    .success-container {
+      p {
+        color: black;
+        font-size: 20px;
+      }
+    }
+
+    small {
+      text-align: center;
+    }
+  }
+}

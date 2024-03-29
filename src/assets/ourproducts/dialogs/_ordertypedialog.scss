@@ -1,0 +1,17 @@
+.order-type-dialog {
+  width: 300px !important;
+
+  .order-type-options {
+    justify-content: center;
+    gap: 20px;
+
+    .radio-row {
+      align-items: center;
+      gap: 5px;
+    }
+  }
+
+  .actions {
+    gap: 5px;
+  }
+}

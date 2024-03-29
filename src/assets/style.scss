@@ -3,10 +3,15 @@
 
 @import "./breakpoints/breakpoints";
 @import "./constants/constants";
-@import "./applayout/applayout";
 @import "./layouts/layouts";
-
-$page-max-width: 1200px;
+@import "./applayout/applayout";
+@import "./userauth/userauth";
+@import "./ourproducts/ourproducts";
+@import "./cart/cart";
+@import "./checkout/checkout";
+@import "./myorders/myorders";
+@import "./queuing/queuing";
+@import "./admin/admin";
 
 body {
   margin: 0;
@@ -41,4 +46,8 @@ body {
 }
 .routerview-container::-webkit-scrollbar-thumb:hover {
   background: #26075f;
+}
+
+.p-toast {
+  max-width: 300px !important;
 }

@@ -1,0 +1,21 @@
+.add-brand-dialog {
+  .add-brand-form {
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+
+    .name-container {
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+
+      .input {
+        flex-grow: 1;
+      }
+    }
+  }
+
+  .actions {
+    gap: 5px;
+  }
+}
