@@ -1,13 +1,9 @@
-@import "./orderspages/online";
-@import "./orderspages/kiosk";
-@import "./orderspages/onsite";
-
-.orders-management-page {
+.activity-logs-page {
   width: 100%;
   background: var(--surface-50);
   height: 100%;
 
-  .orders-management {
+  .activity-logs {
     max-width: 1200px;
     width: 100%;
     padding: 20px;

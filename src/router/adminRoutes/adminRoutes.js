@@ -8,6 +8,7 @@ import OnlineOrders from "@/views/applayouts/admin/orderspages/OnlineOrders.vue"
 import KioskOrders from "@/views/applayouts/admin/orderspages/KioskOrders.vue";
 import OnsiteOrders from "@/views/applayouts/admin/orderspages/OnsiteOrders.vue";
 import OnSiteOrders from "@/views/applayouts/admin/OnSiteOrders.vue";
+import ActivityLogs from "@/views/applayouts/admin/ActivityLogs.vue";
 
 const adminRoutes = [
   {
@@ -103,6 +104,16 @@ const adminRoutes = [
       requiresAuth: true,
       requiresAdmin: true,
     },
+  },
+  {
+    path: "/admin-activity-logs",
+    name: "Activity Logs",
+    component: ActivityLogs,
+    meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
+    },
+    props: (route) => ({ page: parseInt(route.query.page) || 0 }),
   },
 ];
 

@@ -43,6 +43,7 @@ import FileUpload from "primevue/fileupload";
 import ProgressSpinner from "primevue/progressspinner";
 import Editor from "primevue/editor";
 import SelectButton from "primevue/selectbutton";
+import Paginator from "primevue/paginator";
 
 const app = createApp(App);
 
@@ -84,5 +85,6 @@ app.component("FileUpload", FileUpload);
 app.component("ProgressSpinner", ProgressSpinner);
 app.component("Editor", Editor);
 app.component("SelectButton", SelectButton);
+app.component("Paginator", Paginator);
 
 app.mount("#app");
