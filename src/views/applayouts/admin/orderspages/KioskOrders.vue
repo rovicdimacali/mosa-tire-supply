@@ -145,14 +145,14 @@ export default {
 
   mounted() {
     this.fetchOrders();
-    this.selectedFilter = localStorage.getItem("selectedFilter")
-      ? localStorage.getItem("selectedFilter")
+    this.selectedFilter = localStorage.getItem("selectedKioskFilter")
+      ? localStorage.getItem("selectedKioskFilter")
       : "PROCESSING";
   },
 
   watch: {
     selectedFilter(newVal) {
-      localStorage.setItem("selectedFilter", newVal);
+      localStorage.setItem("selectedKioskFilter", newVal);
     },
   },
 };
