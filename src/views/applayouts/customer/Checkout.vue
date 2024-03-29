@@ -155,6 +155,10 @@ export default {
     window.addEventListener("beforeunload", this.onCancelCheckout);
   },
 
+  unmounted() {
+    this.onCancelCheckout;
+  },
+
   beforeUnmount() {
     window.removeEventListener("beforeunload", this.onCancelCheckout);
   },

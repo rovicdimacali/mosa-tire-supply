@@ -199,7 +199,7 @@ export default {
     async deleteFromCart(item) {
       try {
         if (localStorage.getItem("token")) {
-          await removeCartItem(item.cartOrderIdid);
+          await removeCartItem(item.cartOrderId);
         } else if (localStorage.getItem("kioskToken")) {
           await deleteKioskOrder(item.kioskId);
         }
