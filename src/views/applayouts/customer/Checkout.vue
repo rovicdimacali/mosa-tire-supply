@@ -151,16 +151,10 @@ export default {
     } else if (localStorage.getItem("kioskToken")) {
       this.isKioskOrder = localStorage.getItem("kioskToken");
     }
-
-    window.addEventListener("beforeunload", this.onCancelCheckout);
   },
 
   unmounted() {
-    this.onCancelCheckout;
-  },
-
-  beforeUnmount() {
-    window.removeEventListener("beforeunload", this.onCancelCheckout);
+    this.onCancelCheckout();
   },
 };
 </script>
