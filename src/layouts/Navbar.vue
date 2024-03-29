@@ -92,7 +92,7 @@ export default {
         { name: "Accounts", path: "/admin-accounts" },
         { name: "Products", path: "/admin-products" },
         { name: "On-site Orders", path: "/admin-on-site-orders" },
-        { name: "Orders Management", path: "/admin-orders-management" },
+        { name: "Orders Management", path: "/admin-orders" },
         { name: "Activity Logs", path: "/admin-activity-logs" },
       ],
       accessToken: null,

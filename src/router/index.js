@@ -52,6 +52,8 @@ router.beforeEach((to, from, next) => {
     next({ name: "Home" });
   } else if (to.path === "/admin-products" && isAuthenticated) {
     next("/admin-products/brands");
+  } else if (to.path === "/admin-orders" && isAuthenticated) {
+    next("/admin-orders/online");
   } else {
     next();
   }
