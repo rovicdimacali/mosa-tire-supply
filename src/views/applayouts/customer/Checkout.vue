@@ -142,6 +142,18 @@ export default {
         this.isLoading = false;
       }
     },
+
+    async handleBeforeUnload(event) {
+      if (this.checkouts && this.checkouts.carts.length > 0) {
+        event.preventDefault(); // This will prompt the user with a confirmation dialog
+
+        try {
+          await this.onCancelCheckout(); // Wait for the cancellation process to finish
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    },
   },
 
   mounted() {
@@ -151,10 +163,16 @@ export default {
     } else if (localStorage.getItem("kioskToken")) {
       this.isKioskOrder = localStorage.getItem("kioskToken");
     }
+
+    window.addEventListener("beforeunload", this.handleBeforeUnload);
   },
 
   unmounted() {
-    this.onCancelCheckout();
+    this.onCancelCheckout;
+  },
+
+  beforeUnmount() {
+    window.removeEventListener("beforeunload", this.handleBeforeUnload);
   },
 };
 </script>
