@@ -8,11 +8,7 @@
         scrollHeight="calc(70vh - 100px)"
         class="online-orders-table"
       >
-        <Column
-          field="dateCreated"
-          header="Order Date"
-          style="min-width: 250px"
-        >
+        <Column field="dateCreated" header="Log Date" style="min-width: 250px">
         </Column>
         <Column field="activity" header="Activity" style="min-width: 100px">
         </Column>
