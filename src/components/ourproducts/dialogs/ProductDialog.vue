@@ -152,11 +152,12 @@
     <template #footer>
       <div class="actions row">
         <Button
-          label="Add to Cart"
+          :label="isOnsite ? 'Add to Order' : 'Add to Cart'"
           @click="handleCartSubmit"
           :disabled="disableAddToCart"
         />
         <Button
+          v-if="!isOnsite"
           label="Order Now"
           severity="info"
           @click="orderNow"
@@ -173,10 +174,11 @@ import {
   addKioskOrder,
   orderNowKiosk,
 } from "@/services/Products/Products";
+import { addOrder } from "@/services/Admin/OnSiteOrdering";
 import OrderTypeDialog from "./OrderTypeDialog.vue";
 export default {
   components: { OrderTypeDialog },
-  props: ["isVisible", "product"],
+  props: ["isVisible", "product", "isOnsite"],
   data() {
     return {
       localVisible: true,
@@ -345,7 +347,20 @@ export default {
       const token = localStorage.getItem("token");
       const kioskToken = localStorage.getItem("kioskToken");
 
-      if (token === null && kioskToken === null) {
+      if (token && this.isOnsite) {
+        try {
+          await addOrder(this.orderForm);
+          this.$emit("success");
+        } catch (error) {
+          console.error(error);
+          this.$toast.add({
+            severity: "error",
+            summary: "Error",
+            detail: "Error Occured",
+            life: 3000,
+          });
+        }
+      } else if (token === null && kioskToken === null) {
         this.cartOrOrder = "cart";
         this.isOrderTypeDialogVisible = true;
       } else {

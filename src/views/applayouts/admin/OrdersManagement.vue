@@ -30,6 +30,14 @@ export default {
             this.$router.push("/admin-orders/kiosk");
           },
         },
+        {
+          label: "On site",
+          icon: "pi pi-tags",
+          to: "/admin-orders/on-site",
+          command: () => {
+            this.$router.push("/admin-orders/on-site");
+          },
+        },
       ],
       activeIndex: 0,
     };

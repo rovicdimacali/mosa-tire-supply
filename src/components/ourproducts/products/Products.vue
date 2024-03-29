@@ -43,7 +43,7 @@
 import { getBrands, getThreadTypes } from "@/services/Admin/Products";
 import ProductCard from "./ProductCard/ProductCard.vue";
 import ProductDialog from "../dialogs/ProductDialog.vue";
-import { h } from "vue";
+
 export default {
   components: { ProductCard, ProductDialog },
   data() {

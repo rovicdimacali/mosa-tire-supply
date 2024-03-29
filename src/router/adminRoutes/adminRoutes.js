@@ -6,6 +6,8 @@ import ThreadVariants from "@/views/applayouts/admin/productpages/ThreadVariants
 import OrdersManagement from "@/views/applayouts/admin/OrdersManagement.vue";
 import OnlineOrders from "@/views/applayouts/admin/orderspages/OnlineOrders.vue";
 import KioskOrders from "@/views/applayouts/admin/orderspages/KioskOrders.vue";
+import OnsiteOrders from "@/views/applayouts/admin/orderspages/OnsiteOrders.vue";
+import OnSiteOrders from "@/views/applayouts/admin/OnSiteOrders.vue";
 
 const adminRoutes = [
   {
@@ -82,7 +84,25 @@ const adminRoutes = [
           requiresAdmin: true,
         },
       },
+      {
+        path: "/admin-orders/on-site",
+        name: "On Site Orders",
+        component: OnsiteOrders,
+        meta: {
+          requiresAuth: true,
+          requiresAdmin: true,
+        },
+      },
     ],
+  },
+  {
+    path: "/admin-on-site-orders",
+    name: "Onsite Ordering",
+    component: OnSiteOrders,
+    meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
+    },
   },
 ];
 
