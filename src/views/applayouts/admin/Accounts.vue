@@ -179,7 +179,6 @@ export default {
         { name: "Administrator", value: "ADMINISTRATOR" },
         { name: "Product Manager", value: "PRODUCT_MANAGER" },
         { name: "Content Manager", value: "CONTENT_MANAGER" },
-        { name: "Customer Manager", value: "CUSTOMER_MANAGER" },
       ],
       initial_contact_number: null,
       isError: null,
