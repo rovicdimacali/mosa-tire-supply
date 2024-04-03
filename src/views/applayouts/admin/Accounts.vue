@@ -1,4 +1,5 @@
 <template>
+  <Toast />
   <div class="admin-accounts-page">
     <div class="admin-accounts col">
       <h1>Accounts</h1>
