@@ -3,11 +3,13 @@
   <div class="login">
     <div class="overlay row">
       <div class="login-hero col">
-        <img
-          src="https://res.cloudinary.com/dpm5vdakr/image/upload/v1709128297/mosawebapp/assets/Untitled_design_1_k6o8rv.png"
-          alt=""
-          class="logo"
-        />
+        <RouterLink to="/home"
+          ><img
+            src="https://res.cloudinary.com/dpm5vdakr/image/upload/v1709128297/mosawebapp/assets/Untitled_design_1_k6o8rv.png"
+            alt=""
+            class="logo"
+          />
+        </RouterLink>
         <p>Tires That Define Your Drive</p>
       </div>
       <div class="login-form-container">

@@ -9,11 +9,17 @@ const ourProductRoutes = [
     path: "/our-products",
     name: "Our Products",
     component: OurProducts,
+    meta: {
+      requiresAdmin: false,
+    },
   },
   {
     path: "/cart",
     name: "Cart",
     component: Cart,
+    meta: {
+      requiresAdmin: false,
+    },
   },
   {
     path: "/checkout",
@@ -22,6 +28,7 @@ const ourProductRoutes = [
     meta: {
       requiresAuth: true,
       requiresFromCart: true,
+      requiresAdmin: false,
     },
     props: (route) => ({ checkouts: route.query.checkouts }),
   },
@@ -31,6 +38,7 @@ const ourProductRoutes = [
     component: Queuing,
     meta: {
       requiresFromCart: true,
+      requiresAdmin: false,
     },
     props: (route) => ({ checkouts: route.query.checkouts }),
   },
@@ -40,6 +48,7 @@ const ourProductRoutes = [
     component: MyOrders,
     meta: {
       requiresAuth: true,
+      requiresAdmin: false,
     },
   },
 ];
