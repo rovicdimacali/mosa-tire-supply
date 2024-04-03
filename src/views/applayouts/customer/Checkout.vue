@@ -177,6 +177,7 @@ export default {
   },
 
   beforeUnmount() {
+    this.onCancelCheckout();
     window.removeEventListener("beforeunload", this.handleBeforeUnload);
     window.removeEventListener("popstate", this.handlePopstate);
   },
