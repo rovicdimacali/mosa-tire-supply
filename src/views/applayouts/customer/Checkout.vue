@@ -79,6 +79,7 @@
 <script>
 import CheckoutSuccessDialog from "@/components/ourproducts/dialogs/CheckoutSuccessDialog.vue";
 import { cancelCheckout, payCheckout } from "@/services/Products/Products";
+
 export default {
   components: { CheckoutSuccessDialog },
   props: ["checkouts"],
@@ -154,6 +155,12 @@ export default {
         }
       }
     },
+
+    handlePopstate(event) {
+      if (event.state && event.state.cancelCheckout) {
+        this.onCancelCheckout();
+      }
+    },
   },
 
   mounted() {
@@ -165,14 +172,13 @@ export default {
     }
 
     window.addEventListener("beforeunload", this.handleBeforeUnload);
-  },
-
-  unmounted() {
-    this.onCancelCheckout;
+    window.addEventListener("popstate", this.handlePopstate);
+    window.history.pushState({ cancelCheckout: true }, ""); // Push initial state
   },
 
   beforeUnmount() {
     window.removeEventListener("beforeunload", this.handleBeforeUnload);
+    window.removeEventListener("popstate", this.handlePopstate);
   },
 };
 </script>
