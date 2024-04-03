@@ -28,8 +28,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem("token") !== null;
-  const is_staff = localStorage.getItem("is_staff") === "ADMINISTRATOR";
-
+  const is_staff =
+    localStorage.getItem("is_staff") === "ADMINISTRATOR" ||
+    "PRODUCT_MANAGER" ||
+    "CONTENT_MANAGER";
   if (to.matched.some((route) => route.meta.requiresGuest) && isAuthenticated) {
     // If the route requires guest (not authenticated) and the user is authenticated
     next({ name: "Home" }); // Redirect to home or another route
