@@ -121,7 +121,10 @@ export default {
   },
   mounted() {
     this.accessToken = localStorage.getItem("token");
-    this.is_staff = localStorage.getItem("is_staff") === "ADMINISTRATOR";
+    this.is_staff =
+      localStorage.getItem("is_staff") === "ADMINISTRATOR" ||
+      localStorage.getItem("is_staff") === "PRODUCT_MANAGER" ||
+      localStorage.getItem("is_staff") === "CONTENT_MANAGER";
   },
 };
 </script>

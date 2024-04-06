@@ -1,4 +1,5 @@
 <template>
+  <Toast />
   <div class="admin-accounts-page">
     <div class="admin-accounts col">
       <h1>Accounts</h1>
@@ -179,7 +180,7 @@ export default {
         { name: "Administrator", value: "ADMINISTRATOR" },
         { name: "Product Manager", value: "PRODUCT_MANAGER" },
         { name: "Content Manager", value: "CONTENT_MANAGER" },
-        { name: "Customer Manager", value: "CUSTOMER_MANAGER" },
+        { name: "Order Manager", value: "ORDER_MANAGER" },
       ],
       initial_contact_number: null,
       isError: null,

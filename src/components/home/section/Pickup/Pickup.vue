@@ -8,7 +8,9 @@
         convenience – choose the perfect set of tires online, and we'll have
         them ready for you when you arrive!
       </p>
-      <Button label="Order Now and Skip the Queue" class="order-now" />
+      <RouterLink to="/our-products"
+        ><Button label="Order Now and Skip the Queue" class="order-now"
+      /></RouterLink>
     </div>
     <img
       src="https://res.cloudinary.com/dpm5vdakr/image/upload/v1709360647/mosawebapp/assets/Untitled_design_2_fgucjo.png"
