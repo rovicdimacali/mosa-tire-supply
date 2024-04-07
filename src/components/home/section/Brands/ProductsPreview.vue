@@ -75,7 +75,7 @@ export default {
 
   computed: {
     getNumVisible() {
-      return Math.min(4, this.products.length);
+      return Math.min(4, this.products?.length);
     },
   },
 
