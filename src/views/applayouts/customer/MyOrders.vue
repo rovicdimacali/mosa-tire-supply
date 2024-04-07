@@ -12,7 +12,8 @@
           tableStyle="min-width: 50rem"
         >
           <template #header>
-            Remaning amount to pay: {{ myOrders?.totalCartPrice }}
+            Remaning amount to pay: Php
+            {{ myOrders?.totalCartPrice.toLocaleString() }}
           </template>
           <Column field="threadType" header="Thread Type"> </Column>
           <Column header="Size">
