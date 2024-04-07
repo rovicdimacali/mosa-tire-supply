@@ -6,8 +6,6 @@
       :numScroll="1"
       :responsiveOptions="responsiveOptions"
       circular
-      :autoplayInterval="3000"
-      :showNavigators="false"
       class="products-preview-carousel"
     >
       <template #item="slotProps">
