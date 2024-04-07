@@ -46,6 +46,7 @@ export default {
         const response = await getBrands();
         this.brands = response || [];
         this.selectedBrand = this.brands[0];
+        EventBus.emit("brand change", this.selectedBrand);
       } catch (error) {
         console.error(error);
       }
