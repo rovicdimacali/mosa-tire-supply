@@ -17,7 +17,7 @@
         Thank you for choosing us! Your order is now being processed, and our
         dedicated team is working diligently to verify your payment.
       </small>
-      <RouterLink to="/home"><Button label="My Orders" /></RouterLink>
+      <RouterLink to="/my-orders"><Button label="My Orders" /></RouterLink>
     </div>
   </Dialog>
 </template>
