@@ -86,7 +86,6 @@ export default {
   },
 
   mounted() {
-    this.fetchThreadTypes();
     EventBus.on("brand change", (brand) => {
       this.fetchThreadTypes(brand);
     });
