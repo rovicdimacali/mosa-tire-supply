@@ -7,6 +7,7 @@
       :responsiveOptions="responsiveOptions"
       circular
       class="products-preview-carousel"
+      :key="numVisible"
     >
       <template #item="slotProps">
         <Card class="item-card">
