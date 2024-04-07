@@ -25,6 +25,7 @@
         optionValue="name"
         placeholder="Select a Brand"
         class="dropdown-brands"
+        @change="fetchThreadTypes"
       />
     </div>
 
