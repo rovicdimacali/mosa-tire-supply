@@ -38,6 +38,7 @@ export default {
   methods: {
     selectBrand(brand) {
       this.selectedBrand = brand;
+      EventBus.emit("brand change", this.selectedBrand);
     },
 
     async fetchBrands() {

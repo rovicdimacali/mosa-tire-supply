@@ -42,6 +42,7 @@
 
 <script>
 import { getThreadTypes } from "@/services/Admin/Products";
+import { EventBus } from "@/services/EventBus";
 
 export default {
   props: ["brand"],
@@ -74,9 +75,9 @@ export default {
   },
 
   methods: {
-    async fetchThreadTypes() {
+    async fetchThreadTypes(brand) {
       try {
-        const response = await getThreadTypes(this.brand?.name);
+        const response = await getThreadTypes(brand.name);
         this.products = response || [];
       } catch (error) {
         console.error(error);
@@ -86,6 +87,9 @@ export default {
 
   mounted() {
     this.fetchThreadTypes();
+    EventBus.on("brand change", (brand) => {
+      this.fetchThreadTypes(brand);
+    });
   },
 };
 </script>
