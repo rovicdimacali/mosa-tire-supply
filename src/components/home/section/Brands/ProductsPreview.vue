@@ -2,7 +2,7 @@
   <div class="products-preview col">
     <Carousel
       :value="products"
-      :numVisible="this.products.length > 4 ? 4 : this.products.length"
+      :numVisible="this.products?.length > 4 ? 4 : this.products?.length"
       :numScroll="1"
       :responsiveOptions="responsiveOptions"
       circular
