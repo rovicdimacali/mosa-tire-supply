@@ -2,7 +2,7 @@
   <div class="products-preview col">
     <Carousel
       :value="products"
-      :numVisible="4"
+      :numVisible="getNumVisible"
       :numScroll="1"
       :responsiveOptions="responsiveOptions"
       circular
@@ -69,7 +69,14 @@ export default {
           numScroll: 1,
         },
       ],
+      numVisible: 4,
     };
+  },
+
+  computed: {
+    getNumVisible() {
+      return Math.min(4, this.products.length);
+    },
   },
 
   methods: {
@@ -81,12 +88,28 @@ export default {
         console.error(error);
       }
     },
+
+    refreshCarousel() {
+      this.numVisible = this.getNumVisible;
+    },
   },
 
   mounted() {
     EventBus.on("brand change", (brand) => {
       this.fetchThreadTypes(brand);
     });
+  },
+
+  watch: {
+    products: {
+      handler() {
+        this.refreshCarousel();
+      },
+      deep: true,
+    },
+    getNumVisible() {
+      this.refreshCarousel();
+    },
   },
 };
 </script>
