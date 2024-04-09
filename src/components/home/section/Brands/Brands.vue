@@ -38,6 +38,7 @@ export default {
   methods: {
     selectBrand(brand) {
       this.selectedBrand = brand;
+      EventBus.emit("brand change", this.selectedBrand);
     },
 
     async fetchBrands() {
@@ -45,6 +46,7 @@ export default {
         const response = await getBrands();
         this.brands = response || [];
         this.selectedBrand = this.brands[0];
+        EventBus.emit("brand change", this.selectedBrand);
       } catch (error) {
         console.error(error);
       }

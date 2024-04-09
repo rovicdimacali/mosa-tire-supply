@@ -2,13 +2,15 @@
   <div class="products-preview col">
     <Carousel
       :value="products"
-      :numVisible="4"
+      :numVisible="numVisible"
       :numScroll="1"
       :responsiveOptions="responsiveOptions"
       circular
       :autoplayInterval="3000"
-      :showNavigators="false"
+      :showNavigator="false"
+      :showIndicators="false"
       class="products-preview-carousel"
+      :key="numVisible"
     >
       <template #item="slotProps">
         <Card class="item-card">
@@ -42,6 +44,7 @@
 
 <script>
 import { getThreadTypes } from "@/services/Admin/Products";
+import { EventBus } from "@/services/EventBus";
 
 export default {
   props: ["brand"],
@@ -70,22 +73,47 @@ export default {
           numScroll: 1,
         },
       ],
+      numVisible: 4,
     };
   },
 
+  computed: {
+    getNumVisible() {
+      return Math.min(4, this.products?.length);
+    },
+  },
+
   methods: {
-    async fetchThreadTypes() {
+    async fetchThreadTypes(brand) {
       try {
-        const response = await getThreadTypes(this.brand?.name);
+        const response = await getThreadTypes(brand.name);
         this.products = response || [];
       } catch (error) {
         console.error(error);
       }
     },
+
+    refreshCarousel() {
+      this.numVisible = this.getNumVisible;
+    },
   },
 
   mounted() {
-    this.fetchThreadTypes();
+    EventBus.on("brand change", (brand) => {
+      this.fetchThreadTypes(brand);
+    });
+  },
+
+  watch: {
+    products: {
+      handler() {
+        this.refreshCarousel();
+      },
+      deep: true,
+    },
+    getNumVisible() {
+      this.refreshCarousel();
+    },
   },
 };
 </script>
