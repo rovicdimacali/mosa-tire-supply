@@ -49,6 +49,7 @@
         :multiple="false"
         accept="image/*"
         :maxFileSize="5000000"
+        chooseLabel="Upload"
       />
     </form>
     <template #footer>
