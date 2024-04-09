@@ -99,7 +99,7 @@ export default {
           localStorage.removeItem("kioskToken");
           localStorage.setItem("token", response.accessToken);
           localStorage.setItem("userID", response.accountDto.id);
-          localStorage.setItem("name", response.accountDto.fullname);
+          localStorage.setItem("name", response.accountDto.fullName);
           localStorage.setItem("email", response.accountDto.email);
           localStorage.setItem("is_staff", response.accountDto.userRole);
 

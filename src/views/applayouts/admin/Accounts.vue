@@ -272,12 +272,20 @@ export default {
             });
             this.fetchStaffAccounts();
           }
+          this.clearForm();
         } catch (error) {
           console.error(error);
           this.isError = error.response.data.message;
         }
       }
       this.isLoading = false;
+    },
+
+    clearForm() {
+      // Reset all form fields to empty strings
+      for (let key in this.createAccountObj) {
+        this.createAccountObj[key] = "";
+      }
     },
   },
 

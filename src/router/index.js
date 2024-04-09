@@ -31,7 +31,8 @@ router.beforeEach((to, from, next) => {
   const is_staff =
     localStorage.getItem("is_staff") === "ADMINISTRATOR" ||
     localStorage.getItem("is_staff") === "PRODUCT_MANAGER" ||
-    localStorage.getItem("is_staff") === "CONTENT_MANAGER";
+    localStorage.getItem("is_staff") === "CONTENT_MANAGER" ||
+    localStorage.getItem("is_staff") === "ORDER_MANAGER";
 
   if (to.matched.some((route) => route.meta.requiresGuest) && isAuthenticated) {
     // If the route requires guest (not authenticated) and the user is authenticated

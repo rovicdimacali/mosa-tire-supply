@@ -23,7 +23,10 @@
         >{{ link.name }}</RouterLink
       >
     </div>
-    <div class="actions row">
+    <div class="actions row" style="gap: 10px; align-items: center">
+      <p v-if="accessToken" style="margin: 0; color: white">
+        Hi! {{ fullName }}
+      </p>
       <RouterLink v-if="!accessToken" to="/login"
         ><Button label="Login" class="login-btn"
       /></RouterLink>
@@ -95,6 +98,7 @@ export default {
         { name: "Orders Management", path: "/admin-orders" },
         { name: "Activity Logs", path: "/admin-activity-logs" },
       ],
+      fullName: null,
       accessToken: null,
       is_staff: null,
     };
@@ -125,6 +129,7 @@ export default {
       localStorage.getItem("is_staff") === "ADMINISTRATOR" ||
       localStorage.getItem("is_staff") === "PRODUCT_MANAGER" ||
       localStorage.getItem("is_staff") === "CONTENT_MANAGER";
+    this.fullName = localStorage.getItem("name");
   },
 };
 </script>
