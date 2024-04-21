@@ -76,3 +76,20 @@ export async function orderNowKiosk(obj) {
   const response = await axios.post(`/kiosk/orderNow/${kioskToken}`, obj);
   return response.data;
 }
+
+export async function cancelKioskOrder() {
+  const kioskToken = localStorage.getItem("kioskToken");
+  const response = await axios.get(`/kiosk/cancelCheckout/${kioskToken}`);
+  return response.data;
+}
+
+export async function getKioskOrderStatus() {
+  const kioskToken = localStorage.getItem("kioskToken");
+  const response = await axios.get(`/kiosk/getOrderStatus/${kioskToken}`);
+  return response.data;
+}
+
+export async function getCriticalStocks() {
+  const response = await axios.get("/threadTypeDetails/getCriticalStocks");
+  return response.data;
+}

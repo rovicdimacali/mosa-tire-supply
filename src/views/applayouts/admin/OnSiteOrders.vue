@@ -140,10 +140,10 @@
                 <Button
                   label="Cancel"
                   class="proceed-btn"
-                  @click="checkout"
+                  @click="cancel"
                   severity="secondary"
                 />
-                <Button label="Proceed" class="proceed-btn" @click="cancel" />
+                <Button label="Proceed" class="proceed-btn" @click="checkout" />
               </div>
             </div>
           </div>
@@ -293,8 +293,11 @@ export default {
 
     async cancel() {
       try {
-        const itemArray = this.selectedItems.map((item) => item.orderId);
-        await checkoutOrders({ ids: itemArray });
+        const itemArray =
+          this.selectedItems?.length >= 1
+            ? this.selectedItems.map((item) => item.orderId)
+            : [];
+        await cancelOrders({ ids: itemArray?.length >= 1 ? itemArray : [] });
         localStorage.removeItem("onsiteToken");
         this.$toast.add({
           severity: "success",

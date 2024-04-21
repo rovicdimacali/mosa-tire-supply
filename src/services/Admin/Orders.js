@@ -29,3 +29,8 @@ export async function kioskCompleteOrder(token) {
   const response = await axios.get(`/kiosk/setAsCompleted/${token}`);
   return response.data;
 }
+
+export async function orderStatistics() {
+  const response = await axios.get("/orders/getFinishedOrders");
+  return response.data;
+}
