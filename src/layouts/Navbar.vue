@@ -128,7 +128,8 @@ export default {
     this.is_staff =
       localStorage.getItem("is_staff") === "ADMINISTRATOR" ||
       localStorage.getItem("is_staff") === "PRODUCT_MANAGER" ||
-      localStorage.getItem("is_staff") === "CONTENT_MANAGER";
+      localStorage.getItem("is_staff") === "CONTENT_MANAGER" ||
+      localStorage.getItem("is_staff") === "ORDER_MANAGER";
     this.fullName = localStorage.getItem("name");
   },
 };
