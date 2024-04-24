@@ -93,9 +93,15 @@
 <script>
 import { uploadImageCloudinary } from "@/services/Cloudinary/CloudinaryUpload";
 import { addThreadTypes } from "@/services/Admin/Products";
+import { required, helpers } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 export default {
   props: ["isVisible", "brands"],
+  setup() {
+    const v$ = useVuelidate();
+    return { v$ };
+  },
   data() {
     return {
       localVisible: true,
@@ -110,6 +116,24 @@ export default {
       showMessageSuccess: null,
       isLoading: false,
       isUploading: false,
+    };
+  },
+  validations() {
+    return {
+      threadTypeForm: {
+        brand: {
+          required: helpers.withMessage("Brand is required.", required),
+        },
+        type: {
+          required: helpers.withMessage("Type is required.", required),
+        },
+        imageUrl: {
+          required: helpers.withMessage("Image is required.", required),
+        },
+        description: {
+          required: helpers.withMessage("Description is required.", required),
+        },
+      },
     };
   },
   methods: {
@@ -138,15 +162,23 @@ export default {
       this.isLoading = true;
       let threadTypeArray = [];
       threadTypeArray.push(this.threadTypeForm);
-      try {
-        await addThreadTypes(threadTypeArray);
-        this.$emit("success");
-      } catch (error) {
-        console.error(error);
-        if (error.response.data.message.includes("Empty")) {
-          this.isError = "Please complete the form before submitting.";
-        } else {
-          this.isError = error.response.data.message;
+      const result = await this.v$.$validate();
+      if (!result) {
+        // Log specific validation errors
+        this.isError = this.v$.$errors.map((error) => error.$message);
+      } else {
+        try {
+          await addThreadTypes(threadTypeArray);
+          this.$emit("success");
+        } catch (error) {
+          console.error(error);
+          if (error.response.data.message.includes("Empty")) {
+            this.isError = "Please complete the form before submitting.";
+          } else {
+            this.isError = error.response.data.message;
+          }
+        } finally {
+          this.isLoading = false;
         }
       }
       this.isLoading = false;

@@ -1,4 +1,19 @@
 <template>
+  <DataPrivacyDialog
+    v-if="isPrivacyPolicyDialog"
+    :isVisible="isPrivacyPolicyDialog"
+    @close="
+      () => {
+        isPrivacyPolicyDialog = false;
+      }
+    "
+    @accepted="
+      () => {
+        checked = true;
+        isPrivacyPolicyDialog = false;
+      }
+    "
+  />
   <div class="sign-up">
     <div class="overlay row">
       <div class="sign-up-hero col">
@@ -82,12 +97,31 @@
                     />
                   </InputGroup>
                 </div>
+                <div class="row" style="align-items: center; gap: 10px">
+                  <Checkbox
+                    v-model="checked"
+                    id="data-privacy"
+                    :binary="true"
+                  />
+                  <small
+                    for="data-privacy"
+                    @click="isPrivacyPolicyDialog = true"
+                    style="cursor: pointer"
+                  >
+                    I have read and understoood the
+                    <span style="color: var(--primary-color)"
+                      >Data Privacy Terms</span
+                    >
+                    of the web app.
+                  </small>
+                </div>
               </div>
               <Button
                 :loading="isLoading"
                 label="Sign Up"
                 type="submit"
                 class="sign-up-btn"
+                :disabled="checked === false"
               />
             </form>
           </template>
@@ -106,8 +140,10 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import DataPrivacyDialog from "@/components/dataprivacy/DataPrivacyDialog.vue";
 
 export default {
+  components: { DataPrivacyDialog },
   setup() {
     const v$ = useVuelidate();
     return { v$ };
@@ -124,13 +160,15 @@ export default {
       initial_contact_number: null,
       isLoading: false,
       isError: null,
+      isPrivacyPolicyDialog: false,
+      checked: false,
     };
   },
   validations() {
     const contactNumberValidator = helpers.regex(/^9\d{9}$/);
     const contactNumberWithMessage = helpers.withMessage(
       "Incorrect Contact Number.",
-      contactNumberValidator,
+      contactNumberValidator
     );
     return {
       signUpObj: {
@@ -145,20 +183,20 @@ export default {
           required,
           minLength: helpers.withMessage(
             "Password must be 8 characters long.",
-            minLength(8),
+            minLength(8)
           ),
         },
         confirmPassword: {
           required,
           sameAsPassword: helpers.withMessage(
             "Confirm Password must be the same with Password.",
-            sameAs(this.signUpObj.password),
+            sameAs(this.signUpObj.password)
           ),
         },
         contactNumber: {
           required: helpers.withMessage(
             "Contact Number is required.",
-            required,
+            required
           ),
         },
       },

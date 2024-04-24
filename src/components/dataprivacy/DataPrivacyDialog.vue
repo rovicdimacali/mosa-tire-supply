@@ -147,8 +147,7 @@ export default {
   },
   methods: {
     async acceptPrivacyPolicy() {
-      localStorage.setItem("acceptedPrivacyPolicy", true);
-      this.$emit("close");
+      this.$emit("accepted");
     },
   },
   mounted() {

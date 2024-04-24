@@ -1,13 +1,4 @@
 <template>
-  <DataPrivacyDialog
-    v-if="isPrivacyPolicyDialog"
-    :isVisible="isPrivacyPolicyDialog"
-    @close="
-      () => {
-        isPrivacyPolicyDialog = false;
-      }
-    "
-  />
   <div class="applayout col">
     <Navbar />
     <div class="routerview-container">
@@ -22,7 +13,6 @@ export default {
   components: { Navbar, DataPrivacyDialog },
   data() {
     return {
-      isPrivacyPolicyDialog: false,
       isStaff: null,
       token: null,
       isAccepted: null,
@@ -33,9 +23,6 @@ export default {
     this.token = localStorage.getItem("token");
     this.isStaff = localStorage.getItem("is_staff") === "true";
     this.isAccepted = localStorage.getItem("acceptedPrivacyPolicy") === "true";
-    if (this.token && !this.isStaff && !this.isAccepted) {
-      this.isPrivacyPolicyDialog = true;
-    }
   },
 };
 </script>

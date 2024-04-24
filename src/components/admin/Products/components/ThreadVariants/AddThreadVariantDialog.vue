@@ -88,9 +88,15 @@
 </template>
 <script>
 import { addThreadTypeDetail } from "@/services/Admin/Products";
+import { required, helpers } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 export default {
   props: ["isVisible", "threadTypes"],
+  setup() {
+    const v$ = useVuelidate();
+    return { v$ };
+  },
   data() {
     return {
       localVisible: true,
@@ -111,18 +117,53 @@ export default {
       isUploading: false,
     };
   },
+  validations() {
+    return {
+      threadDetailsForm: {
+        threadType: {
+          required: helpers.withMessage("Thread Type is required.", required),
+        },
+        width: {
+          required: helpers.withMessage("Width is required.", required),
+        },
+        aspectRatio: {
+          required: helpers.withMessage("Aspect Ratio is required.", required),
+        },
+        diameter: {
+          required: helpers.withMessage("Diameter is required.", required),
+        },
+        sidewall: {
+          required: helpers.withMessage("Sidewall is required.", required),
+        },
+        price: {
+          required: helpers.withMessage("Price is required.", required),
+        },
+        stocks: {
+          required: helpers.withMessage("Stocks is required.", required),
+        },
+      },
+    };
+  },
   methods: {
     async submitAddDetail() {
       this.isLoading = true;
-      try {
-        await addThreadTypeDetail(this.threadDetailsForm);
-        this.$emit("success");
-      } catch (error) {
-        console.error(error);
-        if (error.response.data.message.includes("Empty")) {
-          this.isError = "Please complete the form before submitting.";
-        } else {
-          this.isError = error.response.data.message;
+      const result = await this.v$.$validate();
+      if (!result) {
+        // Log specific validation errors
+        this.isError = this.v$.$errors.map((error) => error.$message);
+      } else {
+        try {
+          await addThreadTypeDetail(this.threadDetailsForm);
+          this.$emit("success");
+        } catch (error) {
+          console.error(error);
+          if (error.response.data.message.includes("Empty")) {
+            this.isError = "Please complete the form before submitting.";
+          } else {
+            this.isError = error.response.data.message;
+          }
+        } finally {
+          this.isLoading = false;
         }
       }
       this.isLoading = false;

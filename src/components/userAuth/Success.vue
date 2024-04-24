@@ -8,7 +8,16 @@
       style="width: 50px; height: 50px"
     >
     </lord-icon>
-    <p style="color: black">{{ message ? message : "Enter Message Here" }}</p>
+    <p
+      :style="{
+        color:
+          $route.name === 'Queuing' || $route.name === 'Checkout'
+            ? 'black'
+            : 'white',
+      }"
+    >
+      {{ message ? message : "Enter Message Here" }}
+    </p>
     <RouterLink to="/login" v-if="login"
       ><Button label="Back to Login"
     /></RouterLink>
