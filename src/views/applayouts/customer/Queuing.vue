@@ -33,7 +33,7 @@
             </div>
           </div>
         </div>
-        <Button label="Cancel Order" />
+        <Button label="Cancel Order" @click="cancel" />
       </div>
     </div>
     <div v-else class="queuing-col col">
