@@ -267,7 +267,7 @@ export default {
         this.$toast.add({
           severity: "success",
           summary: "Cancelled",
-          detail: "Order Completed",
+          detail: "Order Cancelled",
           life: 3000,
         });
         this.fetchOrders();
