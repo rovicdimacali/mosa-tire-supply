@@ -108,6 +108,12 @@
               @click="complete(slotProps.data)"
               :loading="slotProps.data.loadingComplete"
             ></Button>
+            <Button
+              severity="info"
+              label="Cancel"
+              @click="cancel(slotProps.data)"
+              :loading="slotProps.data.loadingComplete"
+            ></Button>
           </div>
         </template>
       </Column>
@@ -122,6 +128,7 @@ import {
   invalidOrder,
   pickupOrder,
   completeOrder,
+  cancelOrder,
 } from "@/services/Admin/Orders";
 export default {
   data() {
@@ -134,6 +141,7 @@ export default {
         { name: "For Pickup", value: "FOR_PICKUP" },
         { name: "Completed", value: "ORDER_COMPLETED" },
         { name: "Invalid", value: "INVALID_REFERENCE_NUMBER" },
+        { name: "Cancelled", value: "INVALID_REFERENCE_NUMBER" },
       ],
     };
   },
@@ -187,7 +195,7 @@ export default {
         await invalidOrder(order.orderId);
         this.$toast.add({
           severity: "success",
-          summary: "Verified",
+          summary: "Invalidated",
           detail: "Payment Invalidated",
           life: 3000,
         });
@@ -211,7 +219,7 @@ export default {
         await pickupOrder(order.orderId);
         this.$toast.add({
           severity: "success",
-          summary: "Verified",
+          summary: "Status Changed",
           detail: "Ready for Pickup",
           life: 3000,
         });
@@ -235,7 +243,30 @@ export default {
         await completeOrder(order.orderId);
         this.$toast.add({
           severity: "success",
-          summary: "Verified",
+          summary: "Completed",
+          detail: "Order Completed",
+          life: 3000,
+        });
+        this.fetchOrders();
+      } catch (error) {
+        console.error(error);
+        this.$toast.add({
+          severity: "error",
+          summary: "Error",
+          detail: "Error Occurred",
+          life: 3000,
+        });
+      } finally {
+        order.loadingComplete = false; // Reset loading state
+      }
+    },
+    async cancel(order) {
+      try {
+        order.loadingComplete = true; // Set loading state
+        await cancelOrder(order.orderId);
+        this.$toast.add({
+          severity: "success",
+          summary: "Cancelled",
           detail: "Order Completed",
           life: 3000,
         });

@@ -25,6 +25,11 @@ export async function invalidOrder(id) {
   return response.data;
 }
 
+export async function cancelOrder(id) {
+  const response = await axios.get(`/orders/cancelOrder/${id}`);
+  return response.data;
+}
+
 export async function kioskCompleteOrder(token) {
   const response = await axios.get(`/kiosk/setAsCompleted/${token}`);
   return response.data;
