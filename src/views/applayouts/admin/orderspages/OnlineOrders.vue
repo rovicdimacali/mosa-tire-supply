@@ -141,7 +141,7 @@ export default {
         { name: "For Pickup", value: "FOR_PICKUP" },
         { name: "Completed", value: "ORDER_COMPLETED" },
         { name: "Invalid", value: "INVALID_REFERENCE_NUMBER" },
-        { name: "Cancelled", value: "INVALID_REFERENCE_NUMBER" },
+        { name: "Cancelled", value: "CANCELLED" },
       ],
     };
   },
