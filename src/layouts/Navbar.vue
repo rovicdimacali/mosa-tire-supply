@@ -8,11 +8,14 @@
       class="burger-btn"
       @click="sidebarVisible = true"
     />
+
     <div class="logo">
-      <img
-        src="https://res.cloudinary.com/dpm5vdakr/image/upload/v1709128297/mosawebapp/assets/Untitled_design_1_k6o8rv.png"
-        alt=""
-      />
+      <RouterLink to="/">
+        <img
+          src="https://res.cloudinary.com/dpm5vdakr/image/upload/v1709128297/mosawebapp/assets/Untitled_design_1_k6o8rv.png"
+          alt=""
+        />
+      </RouterLink>
     </div>
     <div class="nav-links row">
       <RouterLink
