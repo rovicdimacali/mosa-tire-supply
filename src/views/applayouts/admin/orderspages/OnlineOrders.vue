@@ -109,6 +109,10 @@
               :loading="slotProps.data.loadingComplete"
             ></Button>
             <Button
+              v-if="
+                slotProps.data.status !== 'CANCELLED' &&
+                slotProps.data.status !== 'ORDER_COMPLETED'
+              "
               severity="info"
               label="Cancel"
               @click="cancel(slotProps.data)"

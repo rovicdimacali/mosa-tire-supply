@@ -30,7 +30,7 @@
       <RouterLink v-if="!accessToken" to="/login"
         ><Button label="Login" class="login-btn"
       /></RouterLink>
-      <RouterLink to="/cart"
+      <RouterLink v-if="!is_staff" to="/cart"
         ><Button
           v-tooltip.bottom="'Cart'"
           icon="pi pi-shopping-cart"
