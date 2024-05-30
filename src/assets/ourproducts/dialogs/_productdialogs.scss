@@ -1,5 +1,7 @@
 .product-dialog {
   .product-container {
+    gap: 20px;
+
     @include lg-phone {
       display: flex;
       flex-direction: column;

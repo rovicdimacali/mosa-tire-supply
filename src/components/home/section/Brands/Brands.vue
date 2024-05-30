@@ -5,7 +5,7 @@
       <small>Click on a brand to filter the products.</small>
     </div>
 
-    <div class="brand-row row">
+    <div class="brand-row wrap">
       <div
         v-for="brand in brands"
         :key="brand.id"

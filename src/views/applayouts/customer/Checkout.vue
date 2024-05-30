@@ -15,17 +15,8 @@
       </div>
       <div class="checkout-content col">
         <div class="payments-container col">
-          <SelectButton
-            v-model="selectedPaymentMethod"
-            :options="options"
-            aria-labelledby="basic"
-          />
           <Image
-            :src="
-              selectedPaymentMethod === 'Gcash'
-                ? 'https://chrpphilippines.com/wp-content/uploads/2023/02/bsgc-gcash-qr.jpg'
-                : 'https://www.yugatech.com/wp-content/uploads/2018/08/BPIQR_BPI-yugatech-ph.jpg'
-            "
+            src="https://res.cloudinary.com/dpm5vdakr/image/upload/v1717070308/mosawebapp/assets/440930543_1016405946787441_1512699653799973794_n_pb8tvc.jpg"
             class="image-container"
             imageStyle="width: 300px"
           />
